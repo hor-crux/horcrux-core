@@ -1,0 +1,1 @@
+let CE = window["CustomElement"] = function() {}

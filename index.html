@@ -1,0 +1,26 @@
+<!DOCTYPE HTML>
+<html lang="de">
+	<head>
+		<meta charset="utf-8"/>
+		<!--
+		-->
+		<script src="jspm_packages/github/webcomponents/webcomponentsjs@0.7.12/webcomponents.js"></script>
+		<script src="jspm_packages/system.js"></script>
+		<script src="config.js"></script>
+		<script>
+			if(typeof Function.prototype.name === "undefined")
+			Object.defineProperty(Function.prototype, "name", {
+				get: function() {
+					var r = /function\s+(.+)\(/;
+					return r.exec(this.prototype.constructor.toString())[1];
+				}
+			});			 
+		</script>
+	</head>
+	<body unresolved>
+		<my-app></my-app>
+		<script>
+			System.import("./src/index");
+		</script>
+	</body>
+</html>
