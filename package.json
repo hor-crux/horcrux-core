@@ -1,9 +1,8 @@
 {
   "name": "horcrux-core",
   "version": "0.0.0",
+  "main": "dist/horcrux-core",
   "jspm": {
-    "name": "hor-crux/horcrux-core",
-    "main": "dist/horcrux-core",
     "registry": "github",
     "directories": {},
     "dependencies": {
