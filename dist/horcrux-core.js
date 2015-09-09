@@ -1,0 +1,9 @@
+/// <reference path="../typings/tsd" />
+define(["require", "exports", "./attribute/attribute", "./component/component", "./customelement"], function (require, exports, attribute_1, component_1) {
+    exports.Attribute = attribute_1.Attribute;
+    exports.CustomAttribute = attribute_1.CustomAttribute;
+    exports.Attributes = attribute_1.Attributes;
+    exports.Component = component_1.default;
+});
+
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImhvcmNydXgtY29yZS50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSx1Q0FBdUM7O0lBVXRDLGlCQUFTO0lBQ1QsdUJBQWU7SUFDZixrQkFBVTtJQUNZLGlCQUFTO0lBQy9CIiwiZmlsZSI6ImhvcmNydXgtY29yZS5qcyIsInNvdXJjZXNDb250ZW50IjpbIi8vLyA8cmVmZXJlbmNlIHBhdGg9XCIuLi90eXBpbmdzL3RzZFwiIC8+XHJcblxyXG4vLy0tLS0tLS0gZ2VuZXJhbCBpbXBvcnQuIE1vZHVsZXMgZXhwb3NlIHRvIHRoZSBnbG9iYWwgb2JqZWN0IGUuZy4gJ3dpbmRvdydcclxuaW1wb3J0IFwiLi9jdXN0b21lbGVtZW50XCJcclxuXHJcbi8vLS0tLS0tLSBpbXBvcnRzIGZvciBleHBvcnQgb2YgbW9kdWxlcyBtYWluIGZpbGVcclxuaW1wb3J0IHtBdHRyaWJ1dGUsIEN1c3RvbUF0dHJpYnV0ZSwgQXR0cmlidXRlc30gZnJvbSBcIi4vYXR0cmlidXRlL2F0dHJpYnV0ZVwiO1xyXG5pbXBvcnQgQ29tcG9uZW50RGVjb3JhdG9yIGZyb20gXCIuL2NvbXBvbmVudC9jb21wb25lbnRcIlxyXG5cclxuZXhwb3J0IHtcclxuXHRBdHRyaWJ1dGUsXHJcblx0Q3VzdG9tQXR0cmlidXRlLFxyXG5cdEF0dHJpYnV0ZXMsXHJcblx0Q29tcG9uZW50RGVjb3JhdG9yIGFzIENvbXBvbmVudFxyXG59Il0sInNvdXJjZVJvb3QiOiIvc291cmNlLyJ9
