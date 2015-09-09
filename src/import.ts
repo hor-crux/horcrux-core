@@ -4,14 +4,14 @@ import Component from "./component/component"
 	namespace: "ho",
 	template: false
 })
-export default class Import extends CustomElement {
+class Import extends CustomElement {
 	
 	createdCallback() {
-		let src = this.getAttribute("from") || this.innerHTML;
+		let src = super.getAttribute("from") || super.innerHTML;
 		System.import(src);
 	}
 	
 	attachedCallback() {
-		this.remove();
+		super.remove();
 	}
 }

@@ -1,6 +1,5 @@
 import Component from "./component/component"
 
-
 @Component({
 	namespace: "my",
 })

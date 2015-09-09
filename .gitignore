@@ -1,2 +1,4 @@
 .settings
 jspm_packages
+node_modules
+dist

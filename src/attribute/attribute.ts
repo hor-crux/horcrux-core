@@ -10,4 +10,4 @@ class CustomAttribute {
 	newDOMValue(value:any): void {}
 }
 
-export {Attribute, Attributes, CustomAttribute};
+export {Attribute, CustomAttribute, Attributes};
