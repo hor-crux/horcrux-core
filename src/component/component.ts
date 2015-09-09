@@ -1,5 +1,5 @@
-import loadhtml from "./loadhtml"
-import register from "./register";
+import loadhtml from "../util/loadhtml"
+import register from "./register/register";
 import {ComponentOptions, IComponentOptions} from "./options"
 
 function ComponentDecorator(opt: IComponentOptions): ClassDecorator {

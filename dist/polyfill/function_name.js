@@ -1,0 +1,10 @@
+if (typeof Function.prototype.name === "undefined") {
+    Object.defineProperty(Function.prototype, "name", {
+        get: function () {
+            var r = /function\s+(.+)\(/;
+            return r.exec(this.prototype.constructor.toString())[1];
+        }
+    });
+}
+
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInBvbHlmaWxsL2Z1bmN0aW9uX25hbWUudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsRUFBRSxDQUFBLENBQUMsT0FBYSxRQUFRLENBQUMsU0FBVSxDQUFDLElBQUksS0FBSyxXQUFXLENBQUMsQ0FBQyxDQUFDO0lBQzFELE1BQU0sQ0FBQyxjQUFjLENBQUMsUUFBUSxDQUFDLFNBQVMsRUFBRSxNQUFNLEVBQUU7UUFDakQsR0FBRyxFQUFFO1lBQ0osSUFBSSxDQUFDLEdBQUcsbUJBQW1CLENBQUM7WUFDNUIsTUFBTSxDQUFDLENBQUMsQ0FBQyxJQUFJLENBQUMsSUFBSSxDQUFDLFNBQVMsQ0FBQyxXQUFXLENBQUMsUUFBUSxFQUFFLENBQUMsQ0FBQyxDQUFDLENBQUMsQ0FBQztRQUN6RCxDQUFDO0tBQ0QsQ0FBQyxDQUFDO0FBQ0osQ0FBQyIsImZpbGUiOiJwb2x5ZmlsbC9mdW5jdGlvbl9uYW1lLmpzIiwic291cmNlc0NvbnRlbnQiOlsiaWYodHlwZW9mICg8YW55PkZ1bmN0aW9uLnByb3RvdHlwZSkubmFtZSA9PT0gXCJ1bmRlZmluZWRcIikge1xyXG5cdE9iamVjdC5kZWZpbmVQcm9wZXJ0eShGdW5jdGlvbi5wcm90b3R5cGUsIFwibmFtZVwiLCB7XHJcblx0XHRnZXQ6IGZ1bmN0aW9uKCkge1xyXG5cdFx0XHR2YXIgciA9IC9mdW5jdGlvblxccysoLispXFwoLztcclxuXHRcdFx0cmV0dXJuIHIuZXhlYyh0aGlzLnByb3RvdHlwZS5jb25zdHJ1Y3Rvci50b1N0cmluZygpKVsxXTtcclxuXHRcdH1cclxuXHR9KTtcclxufSJdLCJzb3VyY2VSb290IjoiL3NvdXJjZS8ifQ==

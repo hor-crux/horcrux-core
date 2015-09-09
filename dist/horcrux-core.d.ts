@@ -1,8 +1,9 @@
 declare module "horcrux-core" {
 export {	Attribute,	CustomAttribute,	Attributes,	ComponentDecorator as Component}
-function loadHtml(name: string): Promise<any>;
- function visit(node: Node, cb: (node: Node) => void): void;
- function visit(node: NodeList, cb: (node: Node) => void): void;
+ class CustomElement extends HTMLElement {	createShadowRoot(): DocumentFragment;	host: HTMLElement;}
+	interface Observable {		open(cb:Function, receiver?:any): any;		deliver(): any;		discardChanges():any;		close():void;	}		 class PathObserver implements Observable {		constructor(obj:any, path:string, defaultValue?:any);		open(cb:Function, receiver?:any): any;		deliver(): any;		discardChanges():any;		close():void;	}
+ class System {	static import(name:string): Promise<any>;}
+ let CE: () => void;
  let Attributes: {
     [key: string]: typeof CustomAttribute;
 };
@@ -22,7 +23,38 @@ function loadHtml(name: string): Promise<any>;
     newJSValue(value: any): void;
     newDOMValue(value: any): void;
 }
-function bindNode(node: Node, model: any): void;
+function loadHtml(name: string): Promise<any>;
+ type Dom = Node | NodeList | Array<Node>;
+ type ObjectAndValue = {
+    object: any;
+    value: any;
+};
+class Model {
+    protected objects: Array<any>;
+    constructor(...objects: Array<any>);
+    get(path: string): ObjectAndValue;
+    findObject(path: string): any;
+    static has(object: any, path: string): any;
+    static get(object: any, path: string): any;
+}
+ function visit(node: Dom, cb: (node: Node) => void): void;
+function bindAttribute(node: Node, attr: Attr, model: Model): void;
+function bindNode(node: Node, model: Model): void;
+ let regex: RegExp;
+ function bindDom(dom: Dom, ...models: Array<any>): void;
+/**
+ * Creates a new HTMLElement.prototype, assigns all properties of 'new target()' to it and returns it;
+ */
+ function createPrototype(target: any): any;
+/**
+ * Adds a function named 'key' to 'target', which is a function that calls 'cb' with given 'args'
+ * and then calls the previous 'target[key]' if it was a function with 'args'.
+ */
+ function assignCallback(target: any, key: string, cb: Function, args?: any[]): void;
+/**
+ * Default 'createdCallback' for a Customelement. Appends the 'template' content to shadowroot, if !!template
+ */
+ function createdCallback(template: any): void;
 function register(name: string, target: any, template: any): void;
 interface IComponentOptions {
     namespace?: string;
@@ -34,6 +66,4 @@ interface IComponentOptions {
     private setValue(key, defaultValue);
 }
  function ComponentDecorator(opt: IComponentOptions): ClassDecorator;
- let CE: () => void;
- let PropertyDecorator: PropertyDecorator;
 }

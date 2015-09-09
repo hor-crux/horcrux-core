@@ -48,16 +48,18 @@ gulp.task('build:d.ts', function() {
   .pipe(typescript(tsProject_dts))
   .dts
   .pipe(replace(/export\s*?(?:default)?\s*?(interface|class|function|let|const|var)/g, "$1"))
-  .pipe(replace(/export\s*(?:default)?.*/gm, ""))
-  .pipe(replace(/declare/gm, ""));
+  .pipe(replace(/export\s*(?:default)?.*/gm, ""));
   
   
   var mainDts = gulp.src(mainFile)
   
-  merge(mainDts, srcDts)
+  var extraDts = gulp.src('typings/*.d.ts');
+  
+  merge(mainDts, srcDts, extraDts)
   .pipe(concat(outDTS))
+  .pipe(replace(/declare/gm, ""))
   .pipe(wrap('declare module "' + packagejson.name + '" {\n<%= contents %>\n}'))
-  .pipe(replace(/import.*/gm, ""))
+  .pipe(replace(/^[ \t]*import.*/gm, ""))
   .pipe(replace(/\/\/.*/gm, ""))
   .pipe(replace(/^\n/gm, ""))
   .pipe(replace(/\n\n/gm, "\n"))
