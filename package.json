@@ -4,6 +4,7 @@
   "main": "dist/horcrux-core.js",
   "jspm": {
     "name": "hor-crux/horcrux-core",
+    "main": "dist/horcrux-core.js",
     "registry": "github",
     "directories": {},
     "dependencies": {
