@@ -1,5 +1,6 @@
 import Model from "./model"
 import {regex} from "./bind"
+import {PathObserver} from "observejs"
 
 export default function bindNode(node:Node, model:Model): void {
 	let isTextNode = node.nodeType === 3;

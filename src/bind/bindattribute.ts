@@ -1,6 +1,7 @@
 import {regex} from "./bind"
 import {Attributes} from "../attribute/attribute"
 import Model from "./model"
+import {PathObserver} from "observejs"
 
 export default function bindAttribute(node:Node, attr:Attr, model:Model): void {
 	

@@ -55,7 +55,7 @@ gulp.task('build:d.ts', function() {
   
   var extraDts = gulp.src('typings/*.d.ts');
   
-  merge(mainDts, srcDts, extraDts)
+  merge(srcDts, extraDts, mainDts)
   .pipe(concat(outDTS))
   .pipe(replace(/declare/gm, ""))
   .pipe(wrap('declare module "' + packagejson.name + '" {\n<%= contents %>\n}'))

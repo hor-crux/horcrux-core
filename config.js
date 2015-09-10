@@ -9,7 +9,7 @@ System.config({
 
   map: {
     "html": "github:herrmanno/html@dev",
-    "observer": "github:polymer/observe-js@0.5.6",
+    "observejs": "github:polymer/observe-js@0.5.6",
     "script": "github:herrmanno/script@dev"
   }
 });

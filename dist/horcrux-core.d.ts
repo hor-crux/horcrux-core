@@ -1,9 +1,12 @@
 declare module "horcrux-core" {
+/* class CustomElement extends HTMLElement {	createShadowRoot(): DocumentFragment;	host: HTMLElement;}*/
 export {	Attribute,	CustomAttribute,	Attributes,	ComponentDecorator as Component}
- class CustomElement extends HTMLElement {	createShadowRoot(): DocumentFragment;	host: HTMLElement;}
-	interface Observable {		open(cb:Function, receiver?:any): any;		deliver(): any;		discardChanges():any;		close():void;	}		 class PathObserver implements Observable {		constructor(obj:any, path:string, defaultValue?:any);		open(cb:Function, receiver?:any): any;		deliver(): any;		discardChanges():any;		close():void;	}
  class System {	static import(name:string): Promise<any>;}
  let CE: () => void;
+ class CustomElement extends HTMLElement {
+    createShadowRoot(): DocumentFragment;
+    host: HTMLElement;
+}
  let Attributes: {
     [key: string]: typeof CustomAttribute;
 };
