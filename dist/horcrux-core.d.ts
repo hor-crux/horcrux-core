@@ -1,7 +1,44 @@
 declare module "horcrux-core" {
-/* class CustomElement extends HTMLElement {	createShadowRoot(): DocumentFragment;	host: HTMLElement;}*/
-export {	Attribute,	CustomAttribute,	Attributes,	ComponentDecorator as Component}
- class System {	static import(name:string): Promise<any>;}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+export {
+	Attribute,
+	CustomAttribute,
+	Attributes,
+	ComponentDecorator as Component,
+	IComponentOptions,
+	ComponentOptions,
+	register as egisterComponent,
+	bindDom as bind,
+	Model,
+	Dom,
+	ObjectAndValue
+}
+/*
+ class CustomElement extends HTMLElement {
+	createShadowRoot(): DocumentFragment;
+	host: HTMLElement;
+}
+*/
+
+
+ class System {
+	static import(name:string): Promise<any>;
+}
  let CE: () => void;
  class CustomElement extends HTMLElement {
     createShadowRoot(): DocumentFragment;
