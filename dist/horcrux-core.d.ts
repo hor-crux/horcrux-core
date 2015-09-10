@@ -1,6 +1,6 @@
 declare module "horcrux-core" {
 /* class CustomElement extends HTMLElement {	createShadowRoot(): DocumentFragment;	host: HTMLElement;}*/
-export {	Attribute,	CustomAttribute,	Attributes,	ComponentDecorator as Component,	IComponentOptions,	ComponentOptions,	register as egisterComponent,	bindDom as bind,	Model,	Dom,	ObjectAndValue}
+export {	Attribute,	CustomAttribute,	Attributes,	ComponentDecorator as Component,	IComponentOptions,	ComponentOptions,	registerComponent,	bindDom as bind,	Model,	Dom,	ObjectAndValue,	dependency,	inject,	Dispatcher,	DispatcherAction,	Store,	handle}
  class System {	static import(name:string): Promise<any>;}
  let CE: () => void;
  class CustomElement extends HTMLElement {
@@ -83,7 +83,7 @@ class CallbackHolder {
     register(callback: Function, self?: any): string;
     unregister(id: any): void;
 }
-class Store<T> extends CallbackHolder {
+ class Store<T> extends CallbackHolder {
     protected dispatcher: Dispatcher;
     static handlerMap: any;
     id: string;
@@ -93,5 +93,5 @@ class Store<T> extends CallbackHolder {
     protected handle(action: DispatcherAction): void;
     protected changed(): void;
 }
-function handle(type: string): MethodDecorator;
+ function handle(type: string): MethodDecorator;
 }

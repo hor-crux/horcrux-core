@@ -8,11 +8,13 @@ import "observejs"
 import {Attribute, CustomAttribute, Attributes} from "./attribute/attribute";
 import ComponentDecorator from "./component/component"
 import {IComponentOptions, ComponentOptions} from "./component/options"
-import register from "./component/register/register"
+import registerComponent from "./component/register/register"
 import {bindDom} from "./bind/bind"
 import Model from "./bind/model"
 import {Dom, ObjectAndValue} from "./util/types"
-
+import {register as dependency, inject} from "./dependencyinjection/di"
+import {Dispatcher, DispatcherAction} from "./flux/dispatcher/dispatcher"
+import {Store, handle} from "./flux/store/store"
 
 export {
 	Attribute,
@@ -21,9 +23,15 @@ export {
 	ComponentDecorator as Component,
 	IComponentOptions,
 	ComponentOptions,
-	register as egisterComponent,
+	registerComponent,
 	bindDom as bind,
 	Model,
 	Dom,
-	ObjectAndValue
+	ObjectAndValue,
+	dependency,
+	inject,
+	Dispatcher,
+	DispatcherAction,
+	Store,
+	handle
 }
