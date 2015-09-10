@@ -9,36 +9,42 @@ export default class Model {
 	}
 	
 	public get(path:string): ObjectAndValue {
+		let ret = void 0;
+		
 		this.objects.forEach(obj => {
 			if(Model.has(obj, path))
-				return {
+				return ret = {
 					object: obj,
 					value: Model.get(obj,path)
 				}
 		})
 		
-		return void 0;
+		return ret;
 	}
 	
 	public findObject(path:string): any {
+		let ret = void 0;
 		this.objects.forEach(obj => {
 			if(!!Model.has(obj, path))
-				return obj;
+				return ret = obj;
 		})
 		
-		return void 0;
+		return ret;
 	}
 	
 	static has(object:any, path:string): any {
+		let ret = true;
+		
 		path.split('.')
-		.forEach(part => {
-			if(typeof object[part] === 'undefined')
-				return false;
-			else
+		.forEach((part, index, parts) => {
+			if(typeof object[part] === 'undefined' && index+1 < parts.length)
+				return ret = false;
+			else {
 				object = object[part]
+			}
 		})
 		
-		return true;
+		return ret;
 	}
 	
 	static get(object:any, path:string): any {
