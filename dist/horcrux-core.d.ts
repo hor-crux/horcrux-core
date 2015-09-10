@@ -31,7 +31,7 @@ function loadHtml(name: string): Promise<any>;
 };
 class Model {
     protected objects: Array<any>;
-    constructor(...objects: Array<any>);
+    constructor(objects: Array<any>);
     get(path: string): ObjectAndValue;
     findObject(path: string): any;
     static has(object: any, path: string): any;
@@ -41,7 +41,7 @@ class Model {
 function bindAttribute(node: Node, attr: Attr, model: Model): void;
 function bindNode(node: Node, model: Model): void;
  let regex: RegExp;
- function bindDom(dom: Dom, ...models: Array<any>): void;
+ function bindDom(dom: Dom, models: Array<any>): void;
 /**
  * Creates a new HTMLElement.prototype, assigns all properties of 'new target()' to it and returns it;
  */
