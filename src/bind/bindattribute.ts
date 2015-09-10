@@ -16,7 +16,7 @@ export default function bindAttribute(node:Node, attr:Attr, model:Model): void {
 		else if(!!/\(.*\)/.exec(attr.value)) {
 			bindFunctionWithParamAttribute(node, attr, model, path);
 		}
-		else if(typeof model.get(path) === "function") {
+		else if(typeof model.get(path).value === "function") {
 			bindFunctionAttribute(node, attr, model, path);
 		}
 		else {
@@ -41,7 +41,7 @@ function bindTextAttribute(node:Node, attr:Attr, model:Model, path:string): void
 }
 
 let regex_params = /\((.+)\)/;
-let regex_function = /.*\(/;
+let regex_function = /(.*)\(/;
 
 function bindFunctionWithParamAttribute(node:Node, attr:Attr, model:Model, path:string): void {
 	regex_params.lastIndex = 0;
@@ -50,7 +50,10 @@ function bindFunctionWithParamAttribute(node:Node, attr:Attr, model:Model, path:
 	let params = regex_params.exec(path)[1]
 		.split(",")
 		.map(param => {return param.trim()})
-		.map(param => {return model.get(param).value});
+		.map(param => {
+			let value = model.get(param).value;
+			return typeof value === "undefined" ? param : value;
+		});
 		
 	let functionName = regex_function.exec(path)[1];
 	
