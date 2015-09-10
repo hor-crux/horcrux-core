@@ -36,8 +36,7 @@ function createdCallback(template:any):void {
 	let clone = document.importNode(template.content, true);
 	shadow.appendChild(clone);
 	
-	//visit(shadow, node => {bindNode(node, this);});
-	bindDom(shadow, this);
+	bindDom(shadow, [this]);
 }
 
 export {createPrototype, assignCallback, createdCallback}
