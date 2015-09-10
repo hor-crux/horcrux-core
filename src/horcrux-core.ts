@@ -1,7 +1,7 @@
 /// <reference path="../typings/tsd" />
 
 //------- general import. Modules expose to the global object e.g. 'window'
-import "./customelement"
+import "./component/customelement"
 import "observejs"
 
 //------- imports for export of modules main file

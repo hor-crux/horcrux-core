@@ -6,9 +6,10 @@
     "registry": "github",
     "directories": {},
     "dependencies": {
-      "observer": "github:polymer/observe-js@^0.5.6",
-      "webcomponents": "github:webcomponents/webcomponentsjs@^0.7.12"
-    }
+      "observejs": "polymer/observe-js@^0.5.6",
+      "webcomponents": "webcomponents/webcomponentsjs@^0.7.12"
+    },
+    "devDependencies": {}
   },
   "devDependencies": {
     "gulp": "^3.9.0",

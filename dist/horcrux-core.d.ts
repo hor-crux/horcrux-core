@@ -1,44 +1,7 @@
 declare module "horcrux-core" {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-export {
-	Attribute,
-	CustomAttribute,
-	Attributes,
-	ComponentDecorator as Component,
-	IComponentOptions,
-	ComponentOptions,
-	register as egisterComponent,
-	bindDom as bind,
-	Model,
-	Dom,
-	ObjectAndValue
-}
-/*
- class CustomElement extends HTMLElement {
-	createShadowRoot(): DocumentFragment;
-	host: HTMLElement;
-}
-*/
-
-
- class System {
-	static import(name:string): Promise<any>;
-}
+/* class CustomElement extends HTMLElement {	createShadowRoot(): DocumentFragment;	host: HTMLElement;}*/
+export {	Attribute,	CustomAttribute,	Attributes,	ComponentDecorator as Component,	IComponentOptions,	ComponentOptions,	register as egisterComponent,	bindDom as bind,	Model,	Dom,	ObjectAndValue}
+ class System {	static import(name:string): Promise<any>;}
  let CE: () => void;
  class CustomElement extends HTMLElement {
     createShadowRoot(): DocumentFragment;
@@ -106,4 +69,29 @@ interface IComponentOptions {
     private setValue(key, defaultValue);
 }
  function ComponentDecorator(opt: IComponentOptions): ClassDecorator;
+/**
+ * Creates an instance of this class via new() and registeres this instance for dependency injection.
+ */
+ function register(target: any): void;
+ function inject(clazz: any): PropertyDecorator;
+class CallbackHolder {
+    protected prefix: string;
+    protected lastID: number;
+    protected callbacks: {
+        [key: string]: Function;
+    };
+    register(callback: Function, self?: any): string;
+    unregister(id: any): void;
+}
+class Store<T> extends CallbackHolder {
+    protected dispatcher: Dispatcher;
+    static handlerMap: any;
+    id: string;
+    protected data: T;
+    constructor();
+    register(callback: (data: T) => void, self?: any): string;
+    protected handle(action: DispatcherAction): void;
+    protected changed(): void;
+}
+function handle(type: string): MethodDecorator;
 }
