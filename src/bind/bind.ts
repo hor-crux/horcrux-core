@@ -14,15 +14,11 @@ function bind(node:Node, model:Model): void {
 		});
 	}
 	
-	let isTextNode = node.nodeType === 3;
-	let hasOnlyTextNodes = (<Element>node).childElementCount === 0 
-	if(isTextNode || hasOnlyTextNodes) {
-		bindNode(node, model);
-	}
+	bindNode(node, model);
 	
 }
 
-function bindDom(dom:Dom, ...models:Array<any>): void {
+function bindDom(dom:Dom, models:Array<any>): void {
 	let model = new Model(models);
 	visit(dom, node=>{
 		bind(node, model)

@@ -4,7 +4,7 @@ export default class Model {
 	
 	protected objects:Array<any>;
 	
-	constructor(...objects:Array<any>) {
+	constructor(objects:Array<any>) {
 		this.objects = objects;
 	}
 	
