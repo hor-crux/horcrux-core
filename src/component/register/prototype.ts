@@ -6,10 +6,12 @@ import {bindDom} from "../../bind/bind"
 function createPrototype(target:any): any {
 	let proto = Object.create(HTMLElement.prototype);
 	
+	/*
 	let t = new target();
 	for (var key in t) {
 		proto[key] = t[key];
 	}
+	*/
 	
 	return proto;
 }
@@ -29,7 +31,12 @@ function assignCallback(target:any, key:string, cb:Function, args=[]): void {
 /**
  * Default 'createdCallback' for a Customelement. Appends the 'template' content to shadowroot, if !!template
  */
-function createdCallback(template:any):void {
+function createdCallback(template:any, target:any):void {
+	let t = new target();
+	for (var key in t) {
+		this[key] = t[key];
+	}
+	
 	if(!template)
 		return;
 	let shadow = this.createShadowRoot();

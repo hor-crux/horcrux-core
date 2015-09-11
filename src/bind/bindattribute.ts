@@ -61,6 +61,7 @@ function bindFunctionWithParamAttribute(node:Node, attr:Attr, model:Model, path:
 	
 	let {object, value} = model.get(functionName);
 	
+	attr.ownerElement.removeAttribute(attr.name);
 	node[attr.name.toLocaleLowerCase()] = event => {
 		value.apply(object, params);
 	}
@@ -69,6 +70,7 @@ function bindFunctionWithParamAttribute(node:Node, attr:Attr, model:Model, path:
 function bindFunctionAttribute(node:Node, attr:Attr, model:Model, path:string): void {
 	let {object, value} = model.get(path);
 	
+	attr.ownerElement.removeAttribute(attr.name);
 	node[attr.name.toLocaleLowerCase()] = event => {
 		value.call(object, event);
 	}

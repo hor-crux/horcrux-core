@@ -56,7 +56,7 @@ function bindNode(node: Node, model: Model): void;
 /**
  * Default 'createdCallback' for a Customelement. Appends the 'template' content to shadowroot, if !!template
  */
- function createdCallback(template: any): void;
+ function createdCallback(template: any, target: any): void;
 function register(name: string, target: any, template: any): void;
 interface IComponentOptions {
     namespace?: string;
