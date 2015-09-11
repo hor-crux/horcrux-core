@@ -43,6 +43,10 @@ function createdCallback(template:any, target:any):void {
 	let clone = document.importNode(template.content, true);
 	shadow.appendChild(clone);
 	
+	let wc = window["WebComponents"];
+	if(wc && wc.ShadowCSS)
+		wc.ShadowCSS.shimStyling(template.content, "my-app", "");
+	
 	bindDom(shadow, [this]);
 }
 
