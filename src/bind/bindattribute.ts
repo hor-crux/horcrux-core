@@ -55,9 +55,11 @@ function bindFunctionWithParamAttribute(node:Node, attr:Attr, model:Model, path:
 			return typeof value === "undefined" ? param : value;
 		});
 		
+	//TODO map params to types e.g. 'true' to boolean, 1.2 to number...
+		
 	let functionName = regex_function.exec(path)[1];
 	
-	let {object, value} = model.get(path);
+	let {object, value} = model.get(functionName);
 	
 	node[attr.name.toLocaleLowerCase()] = event => {
 		value.apply(object, params);
