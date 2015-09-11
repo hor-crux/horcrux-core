@@ -1,7 +1,6 @@
 declare module "horcrux-core" {
-/* class CustomElement extends HTMLElement {	createShadowRoot(): DocumentFragment;	host: HTMLElement;}*/
-export {	Attribute,	CustomAttribute,	Attributes,	ComponentDecorator as Component,	IComponentOptions,	ComponentOptions,	registerComponent,	bindDom as bind,	Model,	Dom,	ObjectAndValue,	dependency,	inject,	Dispatcher,	DispatcherAction,	Store,	handle}
  class System {	static import(name:string): Promise<any>;}
+export {	Attribute,	CustomAttribute,	Component,	IComponentOptions,	ComponentOptions,	register,	bindDom,	Model,	Dom,	ObjectAndValue}
  let CE: () => void;
  class CustomElement extends HTMLElement {
     createShadowRoot(): DocumentFragment;
@@ -68,30 +67,5 @@ interface IComponentOptions {
     constructor(opt: IComponentOptions);
     private setValue(key, defaultValue);
 }
- function ComponentDecorator(opt: IComponentOptions): ClassDecorator;
-/**
- * Creates an instance of this class via new() and registeres this instance for dependency injection.
- */
- function register(target: any): void;
- function inject(clazz: any): PropertyDecorator;
-class CallbackHolder {
-    protected prefix: string;
-    protected lastID: number;
-    protected callbacks: {
-        [key: string]: Function;
-    };
-    register(callback: Function, self?: any): string;
-    unregister(id: any): void;
-}
- class Store<T> extends CallbackHolder {
-    protected dispatcher: Dispatcher;
-    static handlerMap: any;
-    id: string;
-    protected data: T;
-    constructor();
-    register(callback: (data: T) => void, self?: any): string;
-    protected handle(action: DispatcherAction): void;
-    protected changed(): void;
-}
- function handle(type: string): MethodDecorator;
+function Component(opt: IComponentOptions): ClassDecorator;
 }

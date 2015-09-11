@@ -1,9 +1,5 @@
 import {Dom} from "./types"
 
-//function visit(node:Node, cb:(node:Node)=>void): void
-//function visit(node:NodeList, cb:(node:Node)=>void): void
-//function visit(node:Array<Node>, cb:(node:Node)=>void): void
-//function visit(node:Node|NodeList|Array<Node>, cb:(node:Node)=>void): void {
 function visit(node:Dom, cb:(node:Node)=>void): void {
 	if(node instanceof NodeList) {
 		return Array.prototype.forEach.call(node, n => {
