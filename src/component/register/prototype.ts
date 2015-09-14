@@ -45,7 +45,7 @@ function createdCallback(template:any, target:any):void {
 	
 	let wc = window["WebComponents"];
 	if(wc && wc.ShadowCSS)
-		wc.ShadowCSS.shimStyling(template.content, "my-app", "");
+		wc.ShadowCSS.shimStyling(template.content, target.selector, "");
 	
 	bindDom(shadow, [this]);
 }
