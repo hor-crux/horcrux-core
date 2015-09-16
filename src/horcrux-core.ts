@@ -6,7 +6,7 @@ import "observejs"
 
 //------- imports for export of modules main file
 import {Attribute, CustomAttribute} from "./attribute/attribute"
-import CustomElement from "./component/customelement"
+import {CustomElement} from "./component/customelement"
 import Component from "./component/component"
 import {IComponentOptions, ComponentOptions} from "./component/options"
 import created from "./component/decorator/created"

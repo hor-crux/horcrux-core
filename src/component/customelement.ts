@@ -15,5 +15,6 @@ declare var HTML5Element: {
 window["HTML5Element"] = function(){};
 
 
-export default class CustomElement extends HTML5Element {
-}
+class CustomElement extends HTML5Element {}
+
+export {CustomElement, HTML5Element}
