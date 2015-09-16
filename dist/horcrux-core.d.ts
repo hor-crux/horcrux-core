@@ -20,7 +20,11 @@ declare module "horcrux-core" {
     newJSValue(value: any): void;
     newDOMValue(value: any): void;
 }
-function (): void;
+ class CustomElement extends HTMLElement {
+    createShadowRoot(): DocumentFragment;
+    host: HTMLElement;
+}
+ function CustomElementDummy(): void;
 function loadHtml(name: string): Promise<any>;
  type Dom = Node | NodeList | Array<Node>;
  type ObjectAndValue = {

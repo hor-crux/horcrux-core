@@ -1,11 +1,13 @@
 window["CustomElement"] = function() {}
 
-declare class CustomElement extends HTMLElement {
-	createShadowRoot(): DocumentFragment;
+class CustomElement extends HTMLElement {
+	createShadowRoot(): DocumentFragment {return void 0};
 	host: HTMLElement;
 }
 
-export default function() {}
+function CustomElementDummy() {}
+
+export {CustomElement, CustomElementDummy}
 /*
 let HTML5Element = {
 	new: ()=>{return void 0;},
