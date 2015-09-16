@@ -8,6 +8,10 @@ import "observejs"
 import {Attribute, CustomAttribute} from "./attribute/attribute";
 import Component from "./component/component"
 import {IComponentOptions, ComponentOptions} from "./component/options"
+import created from "./component/decorator/created"
+import attached from "./component/decorator/attached"
+import detached from "./component/decorator/detached"
+import attributeChanged from "./component/decorator/attributechanged"
 import register from "./component/register/register"
 import {bindDom} from "./bind/bind"
 import Model from "./bind/model"
@@ -19,6 +23,7 @@ export {
 	Component,
 	IComponentOptions,
 	ComponentOptions,
+	created, attached, detached, attributeChanged,
 	register,
 	bindDom,
 	Model,
