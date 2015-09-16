@@ -19,6 +19,9 @@ export default function bindAttribute(node:Node, attr:Attr, model:Model): void {
 		else if(typeof model.get(path).value === "function") {
 			bindFunctionAttribute(node, attr, model, path);
 		}
+		else if((<any>node)._properties, (<any>node)._properties.indexOf(attr.name) !== -1) {
+			bindProperty(node, attr, model, path);
+		}
 		else {
 			bindTextAttribute(node, attr, model, path);
 		}
@@ -35,6 +38,17 @@ function bindTextAttribute(node:Node, attr:Attr, model:Model, path:string): void
 	
 	let cb = (newVal, oldVal) => {
 		attr.value = originalValue.replace(r, newVal);
+	};
+	observer.open(cb);
+	cb(value, null);
+}
+
+function bindProperty(node:Node, attr:Attr, model:Model, path:string): void {
+	let {object, value} = model.get(path);
+	
+	let observer = new PathObserver(object, path);
+	let cb = (newVal, oldVal) => {
+		node[attr.name] = newVal;
 	};
 	observer.open(cb);
 	cb(value, null);
@@ -88,5 +102,4 @@ function bindCustomAttribute(node:Node, attr:Attr, model:Model, path:string): vo
 	};
 	observer.open(cb);
 	cb(value, null);
-	
 }

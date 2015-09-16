@@ -7,12 +7,17 @@ import "observejs"
 //------- imports for export of modules main file
 import {Attribute, CustomAttribute} from "./attribute/attribute"
 import {CustomElementDummy as CustomElement} from "./component/customelement"
+
 import Component from "./component/component"
 import {IComponentOptions, ComponentOptions} from "./component/options"
+
 import created from "./component/decorator/created"
 import attached from "./component/decorator/attached"
 import detached from "./component/decorator/detached"
 import attributeChanged from "./component/decorator/attributechanged"
+
+import Property from "./component/property"
+
 import register from "./component/register/register"
 import {bindDom} from "./bind/bind"
 import Model from "./bind/model"
@@ -26,6 +31,7 @@ export {
 	IComponentOptions,
 	ComponentOptions,
 	created, attached, detached, attributeChanged,
+	Property,
 	register,
 	bindDom,
 	Model,

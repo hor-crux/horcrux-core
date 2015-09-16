@@ -1,6 +1,6 @@
 declare module "horcrux-core" {
-export {	Attribute,	CustomAttribute,	CustomElement,	Component,	IComponentOptions,	ComponentOptions,	created, attached, detached, attributeChanged,	register,	bindDom,	Model,	Dom,	ObjectAndValue}
  class System {	static import(name:string): Promise<any>;}
+export {	Attribute,	CustomAttribute,	CustomElement,	Component,	IComponentOptions,	ComponentOptions,	created, attached, detached, attributeChanged,	Property,	register,	bindDom,	Model,	Dom,	ObjectAndValue}
  let Attributes: {
     [key: string]: typeof CustomAttribute;
 };
@@ -72,4 +72,5 @@ function created(target: any, key: string, descriptor: any): void;
 function attached(target: any, key: string, descriptor: any): void;
 function detached(target: any, key: string, descriptor: any): void;
 function attributeChanged(target: any, key: string, descriptor: any): void;
+function Property(target: any, key: string): void;
 }
