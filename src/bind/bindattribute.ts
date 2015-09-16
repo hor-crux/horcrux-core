@@ -44,22 +44,17 @@ function bindTextAttribute(node:Node, attr:Attr, model:Model, path:string): void
 }
 
 function bindProperty(node:Node, attr:Attr, model:Model, path:string): void {
-	let callback = () => {
+	(function(node, attr, model, path) {
 		let {object, value} = model.get(path);
 		
 		let observer = new PathObserver(object, path);
 		let cb = (newVal, oldVal) => {
-			this[attr.name.substr(1)] = newVal;
+			node[attr.name.substr(1)] = newVal;
 		};
 		observer.open(cb);
 		cb(value, null);
-	}
+	})(node, attr, model, path)
 	
-	let createdCallBack = (<any>node).createCallback;
-	(<any>node).createdCallback = function() {
-		callback.call(this);
-		createdCallBack.apply(this, arguments);
-	}
 }
 
 let regex_params = /\((.+)\)/;
