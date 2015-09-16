@@ -1,11 +1,6 @@
 declare module "horcrux-core" {
  class System {	static import(name:string): Promise<any>;}
-export {	Attribute,	CustomAttribute,	Component,	IComponentOptions,	ComponentOptions,	created, attached, detached, attributeChanged,	register,	bindDom,	Model,	Dom,	ObjectAndValue}
- let CE: () => void;
- class CustomElement extends HTMLElement {
-    createShadowRoot(): DocumentFragment;
-    host: HTMLElement;
-}
+export {	Attribute,	CustomAttribute,	Component,	IComponentOptions,	ComponentOptions,	created, attached, detached, attributeChanged,	register,	bindDom,	Model,	Dom,	ObjectAndValue}
  let Attributes: {
     [key: string]: typeof CustomAttribute;
 };
@@ -24,6 +19,10 @@ declare module "horcrux-core" {
     }, model?: any, path?: string);
     newJSValue(value: any): void;
     newDOMValue(value: any): void;
+}
+class CustomElement extends HTMLElement {
+    createShadowRoot(): DocumentFragment;
+    host: HTMLElement;
 }
 function loadHtml(name: string): Promise<any>;
  type Dom = Node | NodeList | Array<Node>;
