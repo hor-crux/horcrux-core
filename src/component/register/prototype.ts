@@ -6,12 +6,12 @@ import {bindDom} from "../../bind/bind"
 function createPrototype(target:any): any {
 	let proto = Object.create(HTMLElement.prototype);
 	
-	/*
-	let t = new target();
-	for (var key in t) {
-		proto[key] = t[key];
-	}
-	*/
+	
+	['createdCallback', 'attachedCallback', 'detachedCallback', 'attributeChangedCallback']
+	.forEach(cb=>{
+		if(typeof target[cb] === "function")
+		proto[cb] = target[cb];
+	});
 	
 	return proto;
 }
@@ -49,8 +49,10 @@ function createdCallback(template:any, target:any):void {
 		bindDom(shadow, [this]);
 	}
 	
+	/*
 	if(typeof this['createdCallback'] === 'function')
 		this.createdCallback();
+	*/
 }
 
 export {createPrototype, assignCallback, createdCallback}
