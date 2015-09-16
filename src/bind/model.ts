@@ -22,6 +22,14 @@ export default class Model {
 		return ret;
 	}
 	
+	public set(path:string, value:any): void {
+		this.objects.forEach(obj => {
+			if(Model.has(obj, path)) {
+				return Model.set(obj, path, value);
+			}
+		})
+	}
+	
 	public findObject(path:string): any {
 		let ret = void 0;
 		this.objects.forEach(obj => {
@@ -54,6 +62,17 @@ export default class Model {
 		})
 		
 		return object;
+	}
+	
+	static set(object:any, path:string, value:any): void {
+		let parts = path.split('.');
+		let key = parts.pop();
+		
+		parts.forEach(part => {
+			object = object[part]
+		})
+		
+		object[key] = value;
 	}
 	
 }

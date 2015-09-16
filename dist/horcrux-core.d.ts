@@ -1,6 +1,6 @@
 declare module "horcrux-core" {
- class System {	static import(name:string): Promise<any>;}
 export {	Attribute,	CustomAttribute,	CustomElement,	Component,	IComponentOptions,	ComponentOptions,	created, attached, detached, attributeChanged,	Property,	register,	bindDom,	Model,	Dom,	ObjectAndValue}
+ class System {	static import(name:string): Promise<any>;}
  let Attributes: {
     [key: string]: typeof CustomAttribute;
 };
@@ -35,9 +35,11 @@ class Model {
     protected objects: Array<any>;
     constructor(objects: Array<any>);
     get(path: string): ObjectAndValue;
+    set(path: string, value: any): void;
     findObject(path: string): any;
     static has(object: any, path: string): any;
     static get(object: any, path: string): any;
+    static set(object: any, path: string, value: any): void;
 }
  function visit(node: Dom, cb: (node: Node) => void): void;
 function bindAttribute(node: Node, attr: Attr, model: Model): void;
