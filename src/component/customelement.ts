@@ -1,5 +1,3 @@
-window["CustomElement"] = function() {}
-
 class CustomElement extends HTMLElement {
 	createShadowRoot(): DocumentFragment {return void 0};
 	host: HTMLElement;

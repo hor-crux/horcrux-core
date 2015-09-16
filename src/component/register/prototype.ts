@@ -37,17 +37,17 @@ function createdCallback(template:any, target:any):void {
 		this[key] = t[key];
 	}
 	
-	if(!template)
-		return;
-	let shadow = this.createShadowRoot();
-	let clone = document.importNode(template.content, true);
-	shadow.appendChild(clone);
-	
-	let wc = window["WebComponents"];
-	if(wc && wc.ShadowCSS)
-		wc.ShadowCSS.shimStyling(template.content, target.selector, "");
-	
-	bindDom(shadow, [this]);
+	if(!!template) {
+		let shadow = this.createShadowRoot();
+		let clone = document.importNode(template.content, true);
+		shadow.appendChild(clone);
+		
+		let wc = window["WebComponents"];
+		if(wc && wc.ShadowCSS)
+			wc.ShadowCSS.shimStyling(template.content, target.selector, "");
+		
+		bindDom(shadow, [this]);
+	}
 	
 	if(typeof this['createdCallback'] === 'function')
 		this.createdCallback();
