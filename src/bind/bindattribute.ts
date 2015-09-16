@@ -53,6 +53,7 @@ function bindProperty(node:Node, attr:Attr, model:Model, path:string): void {
 		};
 		observer.open(cb);
 		cb(value, null);
+		attr.ownerElement.removeAttribute(attr.name);
 	})(node, attr, model, path)
 	
 }
