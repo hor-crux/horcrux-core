@@ -19,7 +19,7 @@ export default function bindAttribute(node:Node, attr:Attr, model:Model): void {
 		else if(typeof model.get(path).value === "function") {
 			bindFunctionAttribute(node, attr, model, path);
 		}
-		else if((<any>node)._properties && (<any>node)._properties.indexOf(attr.name) !== -1) {
+		else if(attr.name[0] === '#') {
 			bindProperty(node, attr, model, path);
 		}
 		else {
@@ -48,7 +48,7 @@ function bindProperty(node:Node, attr:Attr, model:Model, path:string): void {
 	
 	let observer = new PathObserver(object, path);
 	let cb = (newVal, oldVal) => {
-		node[attr.name] = newVal;
+		node[attr.name.substr(1)] = newVal;
 	};
 	observer.open(cb);
 	cb(value, null);

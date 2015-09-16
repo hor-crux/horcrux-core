@@ -34,7 +34,8 @@ function assignCallback(target:any, key:string, cb:Function, args=[]): void {
 function createdCallback(template:any, target:any):void {
 	let t = new target();
 	for (var key in t) {
-		this[key] = t[key];
+		if(typeof this[key] === 'undefined')
+			this[key] = t[key];
 	}
 	
 	if(!!template) {
@@ -49,10 +50,6 @@ function createdCallback(template:any, target:any):void {
 		bindDom(shadow, [this]);
 	}
 	
-	/*
-	if(typeof this['createdCallback'] === 'function')
-		this.createdCallback();
-	*/
 }
 
 export {createPrototype, assignCallback, createdCallback}
