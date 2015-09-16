@@ -6,10 +6,14 @@ declare class CustomElement extends HTMLElement {
 	host: HTMLElement;
 }
 */
-
-export default class CustomElement extends HTMLElement {
-	createShadowRoot(): DocumentFragment {return void 0;}
-	host: HTMLElement;
+declare var HTML5Element: {
+	new(): HTMLElement
+	prototype: HTMLElement
+	createShadowRoot(): DocumentFragment
+	host: HTMLElement
 }
+window["HTML5Element"] = function(){};
 
-window["CustomElement"] = function() {};
+
+export default class CustomElement extends HTML5Element {
+}
