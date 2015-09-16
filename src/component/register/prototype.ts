@@ -48,6 +48,9 @@ function createdCallback(template:any, target:any):void {
 		wc.ShadowCSS.shimStyling(template.content, target.selector, "");
 	
 	bindDom(shadow, [this]);
+	
+	if(typeof this['createdCallback'] === 'function')
+		this.createdCallback();
 }
 
 export {createPrototype, assignCallback, createdCallback}
