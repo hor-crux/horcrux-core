@@ -1,20 +1,15 @@
-/*
-let CE = window["CustomElement"] = function() {}
+window["CustomElement"] = function() {}
 
 declare class CustomElement extends HTMLElement {
 	createShadowRoot(): DocumentFragment;
 	host: HTMLElement;
 }
-*/
-declare var HTML5Element: {
-	new(): HTMLElement
-	prototype: HTMLElement
-	createShadowRoot(): DocumentFragment
-	host: HTMLElement
+/*
+let HTML5Element = {
+	new: ()=>{return void 0;},
+	
 }
-window["HTML5Element"] = function(){};
-
-
 class CustomElement extends HTML5Element {}
 
 export {CustomElement, HTML5Element}
+*/
