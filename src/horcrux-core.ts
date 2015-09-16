@@ -21,6 +21,7 @@ import {Dom, ObjectAndValue} from "./util/types"
 export {
 	Attribute,
 	CustomAttribute,
+	CustomElement,
 	Component,
 	IComponentOptions,
 	ComponentOptions,
