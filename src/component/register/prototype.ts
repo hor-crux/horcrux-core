@@ -9,8 +9,8 @@ function createPrototype(target:any): any {
 	
 	['createdCallback', 'attachedCallback', 'detachedCallback', 'attributeChangedCallback']
 	.forEach(cb=>{
-		if(typeof target[cb] === "function")
-		proto[cb] = target[cb];
+		if(typeof target.prototype[cb] === "function")
+		proto[cb] = target.prototype[cb];
 	});
 	
 	return proto;
