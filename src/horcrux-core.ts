@@ -3,6 +3,7 @@
 //------- general import. Modules expose to the global object e.g. 'window'
 import "./polyfill/all"
 import "observejs"
+import "html"
 
 //------- imports for export of modules main file
 import {Attribute, CustomAttribute} from "./attribute/attribute"
