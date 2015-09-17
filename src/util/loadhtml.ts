@@ -6,14 +6,42 @@ export default function loadHtml(id:string):Promise<any>  {
 			var selector = "link[rel='import']";
 			var links = document.querySelectorAll(selector);
 			var template = void 0;
-			[].forEach.call(links, function(link) {
-				template = link.import.querySelector("template#" + id);
-				if(!!template)
-					return resolve(template) 
+			
+			var promises = [].map.call(links, function(link) {
+				if(!!link.import) {
+					 return extractTemplate(link, id);
+				}
+				else {
+					return new Promise((resolve, reject) => {
+						link.onload = () => {
+							extractTemplate(link, id)
+							.then(template => {
+								resolve(template);
+							})
+						}
+					})
+				}
 			});
-			if(!template)
-				resolve(void 0);
+			
+			Promise.all(promises)
+			.then(templates => {
+				return templates.filter(template => {
+					return template != void 0;
+				})[0]
+			})
+			.then(template => {
+				resolve(template);
+			})
+			
 		})
 	})(id)
 	
+}
+
+function extractTemplate(link:any, id: string): Promise<any> {
+	var template = link.import.querySelector("template#" + id);
+	if(!!template)
+		return Promise.resolve(template)
+	else
+		return Promise.resolve(void 0);
 }
