@@ -69,7 +69,7 @@ interface IComponentOptions {
     constructor(opt: IComponentOptions);
     private setValue(key, defaultValue);
 }
- var _default: (target: any) => void;
+function Component(target: any): void;
 function created(target: any, key: string, descriptor: any): void;
 function attached(target: any, key: string, descriptor: any): void;
 function detached(target: any, key: string, descriptor: any): void;

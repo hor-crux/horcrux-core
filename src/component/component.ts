@@ -3,7 +3,7 @@ import register from "./register/register";
 import {ComponentOptions, IComponentOptions} from "./options"
 
 
-export default (target) => {
+export default function Component(target) {
 		
 	loadhtml(target.selector)
 	.then(template => {
