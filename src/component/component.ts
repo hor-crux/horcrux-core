@@ -7,7 +7,7 @@ export default function Component(target) {
 		
 	loadhtml(target.selector)
 	.then(template => {
-		return register(name, target, template)
+		return register(target.selector, target, template)
 	});
 }
  
