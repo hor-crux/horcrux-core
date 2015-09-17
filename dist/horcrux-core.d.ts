@@ -25,7 +25,7 @@ declare module "horcrux-core" {
     host: HTMLElement;
 }
  function CustomElementDummy(): void;
-function loadHtml(name: string): Promise<any>;
+function loadHtml(id: string): Promise<any>;
  type Dom = Node | NodeList | Array<Node>;
  type ObjectAndValue = {
     object: any;
@@ -69,7 +69,7 @@ interface IComponentOptions {
     constructor(opt: IComponentOptions);
     private setValue(key, defaultValue);
 }
-function Component(opt: IComponentOptions): ClassDecorator;
+ var _default: (target: any) => void;
 function created(target: any, key: string, descriptor: any): void;
 function attached(target: any, key: string, descriptor: any): void;
 function detached(target: any, key: string, descriptor: any): void;
