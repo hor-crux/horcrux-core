@@ -1,7 +1,7 @@
 let Attributes: {[key:string]:typeof CustomAttribute} = {}
 
 function Attribute(target:any):void {
-	Attributes[target.name.toLowerCase()] = target;
+	Attributes[target.selector.toLowerCase()] = target;
 }
 
 class CustomAttribute {

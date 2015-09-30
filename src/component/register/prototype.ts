@@ -6,17 +6,16 @@ import {bindDom} from "../../bind/bind"
 function createPrototype(target:any): any {
 	let proto = Object.create(HTMLElement.prototype);
 	
-	/*
-	TODO
-	change to:
 	for(let key in target.prototype)
 		proto[key] = target.prototype[key];
-	*/
+	
+	/*
 	['createdCallback', 'attachedCallback', 'detachedCallback', 'attributeChangedCallback']
 	.forEach(cb=>{
 		if(typeof target.prototype[cb] === "function")
 		proto[cb] = target.prototype[cb];
 	});
+	*/
 	
 	return proto;
 }
@@ -38,16 +37,7 @@ function assignCallback(target:any, key:string, cb:Function, args=[]): void {
  */
 function createdCallback(template:any, target:any):void {
 	
-	/*
-	TODO
-	change to:
 	target.call(this);
-	*/
-	let t = new target();
-	for (var key in t) {
-		if(typeof this[key] === 'undefined')
-			this[key] = t[key];
-	}
 	
 	if(!!template) {
 		let shadow = this.createShadowRoot();
@@ -65,4 +55,12 @@ function createdCallback(template:any, target:any):void {
 	
 }
 
-export {createPrototype, assignCallback, createdCallback}
+function attachedCallback(): void {
+	this.attached();
+}
+
+function detachedCallback(): void {
+	this.detached();
+}
+
+export {createPrototype, assignCallback, createdCallback, attachedCallback, detachedCallback}
