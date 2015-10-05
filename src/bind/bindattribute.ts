@@ -5,6 +5,9 @@ import {PathObserver} from "observejs"
 
 export default function bindAttribute(node:Node, attr:Attr, model:Model): void {
 	
+	//TODO use Bindings
+	//TODO also detect CustomAttribute with non-{{}} Values
+	
 	regex.lastIndex = 0;
 	let match = regex.exec(attr.value);
 	if(match) {

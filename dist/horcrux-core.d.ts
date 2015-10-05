@@ -1,6 +1,22 @@
 declare module "horcrux-core" {
-export {	Attribute,	CustomAttribute,	CustomElement,	Component,	IComponentOptions,	ComponentOptions,	created, attached, detached, attributeChanged,	Property,	register,	bindDom,	Model,	Dom,	ObjectAndValue}
- class System {	static import(name:string): Promise<any>;}
+export {
+	Attribute,
+	CustomAttribute,
+	CustomElement,
+	Component,
+	IComponentOptions,
+	ComponentOptions,
+	created, attached, detached, attributeChanged,
+	Property,
+	register,
+	bindDom,
+	Model,
+	Dom,
+	ObjectAndValue
+}
+ class System {
+	static import(name:string): Promise<any>;
+}
  let Attributes: {
     [key: string]: typeof CustomAttribute;
 };
@@ -23,9 +39,13 @@ declare module "horcrux-core" {
  class CustomElement extends HTMLElement {
     host: HTMLElement;
     shadowRoot: DocumentFragment;
+    properties: Array<string>;
     createShadowRoot(): DocumentFragment;
     canActivate(): Promise<any>;
     canDeactivate(): Promise<any>;
+    created(): void;
+    attached(): void;
+    detached(): void;
 }
  function CustomElementDummy(): void;
 function loadHtml(id: string): Promise<any>;
@@ -62,6 +82,8 @@ function bindNode(node: Node, model: Model): void;
  * Default 'createdCallback' for a Customelement. Appends the 'template' content to shadowroot, if !!template
  */
  function createdCallback(template: any, target: any): void;
+ function attachedCallback(): void;
+ function detachedCallback(): void;
 function register(name: string, target: any, template: any): void;
 interface IComponentOptions {
     namespace?: string;
@@ -78,4 +100,14 @@ function attached(target: any, key: string, descriptor: any): void;
 function detached(target: any, key: string, descriptor: any): void;
 function attributeChanged(target: any, key: string, descriptor: any): void;
 function Property(target: any, key: string): void;
+ class Binding {
+    private other;
+    private changed;
+    private value;
+    constructor(counterBinding?: Binding);
+    setNewValue(value: any): void;
+    onNewValue(callback: (value: any) => any): void;
+    getvalue(): any;
+    getCounterBinding(): Binding;
+}
 }
