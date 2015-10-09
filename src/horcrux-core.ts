@@ -12,10 +12,7 @@ import {CustomElementDummy as CustomElement} from "./component/customelement"
 import Component from "./component/component"
 import {IComponentOptions, ComponentOptions} from "./component/options"
 
-import created from "./component/decorator/created"
-import attached from "./component/decorator/attached"
-import detached from "./component/decorator/detached"
-import attributeChanged from "./component/decorator/attributechanged"
+import {Binding, ModelBinding} from "./bind/binding";
 
 import Property from "./component/property"
 
@@ -31,7 +28,7 @@ export {
 	Component,
 	IComponentOptions,
 	ComponentOptions,
-	created, attached, detached, attributeChanged,
+	Binding, ModelBinding,
 	Property,
 	register,
 	bindDom,

@@ -51,7 +51,7 @@ function createdCallback(template:any, target:any):void {
 		bindDom(shadow, [this]);
 	}
 	
-	//TODO call 'this.created' here. do analog for attached, detached, etc...
+	this.created();
 	
 }
 

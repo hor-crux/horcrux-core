@@ -8,8 +8,6 @@ class Binding {
 	private changed:(value:any)=>any;
 	private value: any;
 	
-	//TODO add Transformators
-	
 	constructor(counterBinding?:Binding) {
 		if(counterBinding) {
 			this.other = counterBinding;
@@ -26,6 +24,8 @@ class Binding {
 			callback.call(void 0, value);
 			this.value = value;
 		};
+		
+		callback(this.value);
 	}
 	
 	public getvalue(): any {
@@ -39,6 +39,8 @@ class Binding {
 
 class ModelBinding extends Binding {
 	
+	//TODO add Transformators
+	
 	constructor(attribute:Attr, model:Model) {
 		super();
 		
@@ -49,13 +51,20 @@ class ModelBinding extends Binding {
 			let {object, value} = model.get(path);
 			let observer = new PathObserver(object, path);
 	
+			// update Counter-Binding on Model-Change
 			observer.open((newVal, oldVal) => {
 				this.setNewValue(newVal);
 			});
+			
+			// update Model on Counter-Binding-Change
+			this.onNewValue(val => {
+				model.set(path, val);
+			})
 		}
 		else {
 			this.setNewValue(attribute.value);
 		}
+		
 	
 	}
 	
@@ -63,4 +72,4 @@ class ModelBinding extends Binding {
 
 
 
-export {Binding}
+export {Binding, ModelBinding}

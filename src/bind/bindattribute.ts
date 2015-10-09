@@ -7,24 +7,31 @@ export default function bindAttribute(node:Node, attr:Attr, model:Model): void {
 	
 	//TODO use Bindings
 	//TODO also detect CustomAttribute with non-{{}} Values
+	//TODO call Alternative if {{.*}} does not match: setProperty
 	
+	if(Attributes[attr.name.toLowerCase()] !== undefined) {
+		return bindCustomAttribute(node, attr, model);
+	}
 	regex.lastIndex = 0;
 	let match = regex.exec(attr.value);
 	if(match) {
 		let path = match[1];
 		
-		if(Attributes[attr.name.toLowerCase()] !== undefined) {
-			return bindCustomAttribute(node, attr, model, path);
-		}
-		else if(!!/\(.*\)/.exec(attr.value)) {
+		if(!!/\(.*\)/.exec(attr.value)) {
 			bindFunctionWithParamAttribute(node, attr, model, path);
 		}
 		else if(typeof model.get(path).value === "function") {
 			bindFunctionAttribute(node, attr, model, path);
 		}
+		
+		else if((<any>attr.ownerElement).properties.indexOf(attr.name) > -1) {
+			bindProperty(node, attr, model, path);
+		}
+		/*
 		else if(attr.name[0] === '#') {
 			bindProperty(node, attr, model, path);
 		}
+		*/
 		else {
 			bindTextAttribute(node, attr, model, path);
 		}
@@ -98,9 +105,10 @@ function bindFunctionAttribute(node:Node, attr:Attr, model:Model, path:string): 
 }
 
 
-function bindCustomAttribute(node:Node, attr:Attr, model:Model, path:string): void {
-	let customAttr = new Attributes[attr.name](node, attr, model, path);
+function bindCustomAttribute(node:Node, attr:Attr, model:Model): void {
+	let customAttr = new Attributes[attr.name](node, attr, model);
 	
+	/*
 	let {object, value} = model.get(path);
 	
 	let observer = new PathObserver(object, path);
@@ -109,4 +117,5 @@ function bindCustomAttribute(node:Node, attr:Attr, model:Model, path:string): vo
 	};
 	observer.open(cb);
 	cb(value, null);
+	*/
 }
