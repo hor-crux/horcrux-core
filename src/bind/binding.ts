@@ -16,7 +16,7 @@ class Binding {
 	}
 	
 	public setNewValue(value:any): void {
-		this.other.changed(value);
+		this.other && this.other.changed(value);
 	}
 	
 	public onNewValue(callback:(value:any)=>any): void {
