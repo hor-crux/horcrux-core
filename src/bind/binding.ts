@@ -19,13 +19,14 @@ class Binding {
 		this.other && this.other.changed(value);
 	}
 	
-	public onNewValue(callback:(value:any)=>any): void {
+	public onNewValue(callback:(value:any)=>any, callNow=true): void {
 		this.changed = value => {
 			callback.call(void 0, value);
 			this.value = value;
 		};
 		
-		callback(this.value);
+		if(callNow)
+			callback(this.value);
 	}
 	
 	public getvalue(): any {
@@ -59,7 +60,7 @@ class ModelBinding extends Binding {
 			// update Model on Counter-Binding-Change
 			this.onNewValue(val => {
 				model.set(path, val);
-			})
+			}, false)
 		}
 		else {
 			this.setNewValue(attribute.value);
