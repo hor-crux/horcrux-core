@@ -24,7 +24,7 @@ export default function bindAttribute(node:Node, attr:Attr, model:Model): void {
 			bindFunctionAttribute(node, attr, model, path);
 		}
 		
-		else if((<any>attr.ownerElement).properties.indexOf(attr.name) > -1) {
+		else if(!!(<any>attr.ownerElement).properties && (<any>attr.ownerElement).properties.indexOf(attr.name) > -1) {
 			bindProperty(node, attr, model, path);
 		}
 		/*
