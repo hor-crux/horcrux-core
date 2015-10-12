@@ -26,7 +26,7 @@ class Binding {
 		};
 		
 		if(callNow)
-			callback(this.value);
+			this.changed(this.value);
 	}
 	
 	public getvalue(): any {
