@@ -27,7 +27,7 @@ function bindNode(node: Node, model: Model): void;
     private value;
     constructor(counterBinding?: Binding);
     setNewValue(value: any): void;
-    onNewValue(callback: (value: any) => any, callNow?: boolean): void;
+    onNewValue(callback: (value: any) => any, self?: any, callNow?: boolean): void;
     getvalue(): any;
     getCounterBinding(): Binding;
 }

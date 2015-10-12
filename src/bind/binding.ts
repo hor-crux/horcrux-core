@@ -19,9 +19,9 @@ class Binding {
 		this.other && this.other.changed(value);
 	}
 	
-	public onNewValue(callback:(value:any)=>any, callNow=true): void {
+	public onNewValue(callback:(value:any)=>any, self?:any, callNow=true): void {
 		this.changed = value => {
-			callback.call(void 0, value);
+			!!self ? callback.call(self, value) : callback(value);
 			this.value = value;
 		};
 		
