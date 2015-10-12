@@ -7,16 +7,10 @@ function Attribute(target:any):void {
 	Attributes[target.selector.toLowerCase()] = target;
 }
 
-class CustomAttributeBase {
-	constructor(protected node:Node, protected attr:Attr, protected model:Model) {}
-	
-}
-
-class CustomAttribute extends CustomAttributeBase {
+class CustomAttribute {
 	protected binding: Binding;
 	
-	constructor(node:Node, attr:Attr, model:Model) {
-		super(node, attr, model);
+	constructor(protected node:Node, protected attr:Attr, protected model:Model) {
 		this.createBinding();
 		this.init();
 	}

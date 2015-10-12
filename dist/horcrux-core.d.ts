@@ -1,6 +1,6 @@
 declare module "horcrux-core" {
- class System {	static import(name:string): Promise<any>;}
 export {	Attribute,	CustomAttribute,	CustomElement,	Component,	IComponentOptions,	ComponentOptions,	Binding, ModelBinding,	Property,	register,	bindDom,	Model,	Dom,	ObjectAndValue}
+ class System {	static import(name:string): Promise<any>;}
  type Dom = Node | NodeList | Array<Node>;
  type ObjectAndValue = {
     object: any;
@@ -33,6 +33,19 @@ function bindNode(node: Node, model: Model): void;
 }
  class ModelBinding extends Binding {
     constructor(attribute: Attr, model: Model);
+}
+ let Attributes: {
+    [key: string]: typeof CustomAttribute;
+};
+ function Attribute(target: any): void;
+ class CustomAttribute {
+    protected node: Node;
+    protected attr: Attr;
+    protected model: Model;
+    protected binding: Binding;
+    constructor(node: Node, attr: Attr, model: Model);
+    protected createBinding(): void;
+    protected init(): any;
 }
  class CustomElement extends HTMLElement {
     host: HTMLElement;
