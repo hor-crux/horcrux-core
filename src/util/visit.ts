@@ -1,6 +1,7 @@
 import {Dom} from "./types"
 
 function visit(node:Dom, cb:(node:Node)=>void): void {
+	
 	if(node instanceof NodeList) {
 		return Array.prototype.forEach.call(node, n => {
 			visit(n, cb);

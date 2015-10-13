@@ -93,4 +93,7 @@ interface IComponentOptions {
 }
 function Component(target: any): void;
 function Property(target: any, key: string): void;
+interface Node {
+    dontVisit?: boolean;
+}
 }
