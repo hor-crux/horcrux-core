@@ -60,6 +60,7 @@ function bindNode(node: Node, model: Model): void;
     onCreated: Array<(self: CustomElement) => any>;
     onAttached: Array<(self: CustomElement) => any>;
     onDetached: Array<(self: CustomElement) => any>;
+    beforeBinding: Array<Promise<any>>;
 }
  function CustomElementDummy(): void;
 /**

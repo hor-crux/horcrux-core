@@ -11,6 +11,7 @@ class CustomElement extends HTMLElement {
 	onCreated: Array<(self:CustomElement)=>any>;
 	onAttached: Array<(self:CustomElement)=>any>;
 	onDetached: Array<(self:CustomElement)=>any>;
+	beforeBinding: Array<Promise<any>>;
 }
 
 function CustomElementDummy() {
@@ -18,6 +19,7 @@ function CustomElementDummy() {
 	this.onCreated = this.onCreated || [];
 	this.onAttached = this.onAttached || [];
 	this.onDetached = this.onDetached || [];
+	this.beforeBinding = this.beforeBinding || [];
 }
 CustomElementDummy.prototype.canActivate = function() {
 	return Promise.resolve('');
