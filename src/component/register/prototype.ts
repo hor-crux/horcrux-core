@@ -64,7 +64,11 @@ function createdCallback(template:any, target:any):void {
 		
 		let unresolved = [].filter.call(shadow.querySelectorAll("*[wait]"), element => {
 			return !(element.nodeName.toLowerCase() in ComponentRegistry);
-		});
+		}).map(element => {
+			return element.nodeName.toLowerCase();
+		})
+		.sort()
+		.reduce((a, b) => { if (b != a[0]) a.unshift(b); return a }, []);
 		
 		if(unresolved.length > 0) {
 			let eb = get(EventBus);
