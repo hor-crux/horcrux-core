@@ -33,7 +33,7 @@ CustomElementDummy.prototype.created = function() {}
 CustomElementDummy.prototype.attached = function() {}
 CustomElementDummy.prototype.detached = function() {}
 
-Object.defineProperty(CustomElement.prototype, "parentComponent", {
+Object.defineProperty(CustomElementDummy.prototype, "parentComponent", {
 	get: function () {
 		let parent = void 0;
 		while(!(parent instanceof CustomElementDummy)) {
@@ -41,7 +41,8 @@ Object.defineProperty(CustomElement.prototype, "parentComponent", {
 		}
 		
 		return parent;
-	}
+	},
+	enumerable: true
 });
 
 
