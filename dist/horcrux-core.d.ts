@@ -59,6 +59,9 @@ function bindNode(node: Node, model: Model): void;
     detached(): void;
 }
  function CustomElementDummy(): void;
+/**
+ * @returns Promise of template
+ */
 function loadHtml(id: string): Promise<any>;
 /**
  * Creates a new HTMLElement.prototype, assigns all properties of 'new target()' to it and returns it;

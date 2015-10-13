@@ -1,3 +1,6 @@
+/**
+ * @returns Promise of template
+ */
 export default function loadHtml(id:string):Promise<any>  {
 	 return (function(id) {
             
@@ -9,25 +12,35 @@ export default function loadHtml(id:string):Promise<any>  {
 			
 			var promises = [].map.call(links, function(link) {
 				if(!!link.import) {
-					 return extractTemplate(link, id);
+					 return Promise.resolve(link);
+					 //return extractTemplate(link, id);
 				}
 				else {
 					return new Promise((resolve, reject) => {
 						link.onload = () => {
+							resolve(link);
+							/*
 							extractTemplate(link, id)
 							.then(template => {
 								resolve(template);
 							})
+							*/
 						}
 					})
 				}
 			});
 			
 			Promise.all(promises)
+			.then(links => {
+				return [].map.call(links, link => {
+					return extractTemplate(link, id);
+				})
+			})
 			.then(templates => {
-				return templates.filter(template => {
+				templates = templates.filter(template => {
 					return template != void 0;
-				})[0]
+				});
+				return templates[0];
 			})
 			.then(template => {
 				resolve(template);
