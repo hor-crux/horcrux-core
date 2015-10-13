@@ -1,6 +1,6 @@
 declare module "horcrux-core" {
- class System {	static import(name:string): Promise<any>;}
 export {	Attribute,	CustomAttribute,	CustomElement,	Component,	IComponentOptions,	ComponentOptions,	Binding, ModelBinding,	Property,	register,	bindDom,	Model,	Dom,	ObjectAndValue}
+ class System {	static import(name:string): Promise<any>;}
  type Dom = Node | NodeList | Array<Node>;
  type ObjectAndValue = {
     object: any;
@@ -93,7 +93,4 @@ interface IComponentOptions {
 }
 function Component(target: any): void;
 function Property(target: any, key: string): void;
-interface Node {
-    dontVisit?: boolean;
-}
 }

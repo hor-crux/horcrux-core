@@ -8,17 +8,20 @@ let regex = /\{\{(.+)\}\}/gm;
 
 
 function bind(node:Node, model:Model): boolean {
+	if(!!(<any>node).dontVisit)
+		return false;
+	
 	if(node.attributes) {
 		Array.prototype.forEach.call(node.attributes, attr => {
 			bindAttribute(node, attr, model);
 		});
 	}
-	if(!!node.dontVisit)
+	
+	if(!!(<any>node).dontVisit)
 		return false;
-	else {
-		bindNode(node, model);
-		return true;
-	}
+		
+	bindNode(node, model);
+	return true;
 }
 
 function bindDom(dom:Dom, models:Array<any>): void {
