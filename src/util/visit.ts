@@ -12,9 +12,10 @@ function visit(node:Dom, cb:(node:Node)=>void): void {
 			visit(n, cb);
 		});
 	}
-	else {
-		if((<any>node).dontVisit)
+	else if(node instanceof Node) {
+		if(node.dontVisit)
 			return;
+			
 		cb(<Node>node);
 		if((<Node>node).hasChildNodes()) {
 			Array.prototype.forEach.call((<Node>node).childNodes, n => {

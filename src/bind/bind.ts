@@ -13,10 +13,9 @@ function bind(node:Node, model:Model): void {
 			bindAttribute(node, attr, model);
 		});
 	}
-	
-	if(!!node.parentNode)
-		bindNode(node, model);
-	
+	if(!!node.dontVisit)
+		return;
+	bindNode(node, model);
 }
 
 function bindDom(dom:Dom, models:Array<any>): void {
