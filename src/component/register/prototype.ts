@@ -52,7 +52,7 @@ function createdCallback(template:any, target:any):void {
 	}
 	
 	this.onCreated.forEach(method => {
-		method.call(this);
+		method.call(this, this);
 	})
 	
 	this.created();
@@ -60,14 +60,14 @@ function createdCallback(template:any, target:any):void {
 
 function attachedCallback(): void {
 	this.onAttached.forEach(method => {
-		method.call(this);
+		method.call(this, this);
 	})
 	this.attached();
 }
 
 function detachedCallback(): void {
 	this.onDetached.forEach(method => {
-		method.call(this);
+		method.call(this, this);
 	})
 	this.detached();
 }
