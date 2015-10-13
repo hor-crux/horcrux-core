@@ -59,7 +59,7 @@ function bindProperty(node:Node, attr:Attr, model:Model, path:string): void {
 		
 		let observer = new PathObserver(object, path);
 		let cb = (newVal, oldVal) => {
-			node[attr.name.substr(1)] = newVal;
+			node[attr.name] = newVal;
 		};
 		observer.open(cb);
 		cb(value, null);

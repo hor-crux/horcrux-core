@@ -4,7 +4,7 @@ import {PathObserver} from "observejs"
 
 export default function bindNode(node:Node, model:Model): void {
 	let isTextNode = node.nodeType === 3;
-	let hasOnlyTextNodes = (<Element>node).childElementCount === 0 
+	let hasOnlyTextNodes =  ((<any>node).shadowRoot && (<any>node).shadowRoot.childElementCount === 0) || (<Element>node).childElementCount === 0 
 	if(isTextNode || hasOnlyTextNodes) {
 		bindTextNode(node, model);
 	}

@@ -17,6 +17,12 @@ function visit(node:Dom, cb:(node:Node)=>boolean): void {
 		if(!cb(<Node>node))
 			return;
 			
+		if((<any>node).shadowRoot && (<any>node).shadowRoot.hasChildNodes()) {
+			Array.prototype.forEach.call((<any>node).shadowRoot.childNodes, n => {
+				visit(n, cb);
+			});
+		}
+			
 		if((<Node>node).hasChildNodes()) {
 			Array.prototype.forEach.call((<Node>node).childNodes, n => {
 				visit(n, cb);
