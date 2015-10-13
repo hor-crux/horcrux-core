@@ -17,7 +17,9 @@ export default function loadHtml(id:string):Promise<any>  {
 				}
 				else {
 					return new Promise((resolve, reject) => {
+						let onload = link.onload.bind(link);
 						link.onload = () => {
+							onload();
 							resolve(link);
 							/*
 							extractTemplate(link, id)
