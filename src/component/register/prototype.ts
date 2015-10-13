@@ -6,17 +6,19 @@ import {bindDom} from "../../bind/bind"
 function createPrototype(target:any): any {
 	let proto = Object.create(HTMLElement.prototype);
 	
-	for(let key in target.prototype)
-		proto[key] = target.prototype[key];
+	let t = target;
+	do {
+		t = t.prototype || t.__proto__;
+		Object.getOwnPropertyNames(t)
+		.forEach(key => {
+			Object.defineProperty(proto, key, Object.getOwnPropertyDescriptor(t, key));
+		})
+	} while(!!(t.prototype || t.__proto__))
 	
 	/*
-	['createdCallback', 'attachedCallback', 'detachedCallback', 'attributeChangedCallback']
-	.forEach(cb=>{
-		if(typeof target.prototype[cb] === "function")
-		proto[cb] = target.prototype[cb];
-	});
+	for(let key in target.prototype)
+		proto[key] = target.prototype[key];
 	*/
-	
 	return proto;
 }
 
