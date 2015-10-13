@@ -14,6 +14,7 @@ class CustomElement extends HTMLElement {
 }
 
 function CustomElementDummy() {
+	this.properties = [];
 	this.onCreated = this.onCreated || [];
 	this.onAttached = this.onAttached || [];
 	this.onDetached = this.onDetached || [];
