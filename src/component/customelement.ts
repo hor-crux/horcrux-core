@@ -35,8 +35,8 @@ CustomElementDummy.prototype.detached = function() {}
 
 Object.defineProperty(CustomElementDummy.prototype, "parentComponent", {
 	get: function () {
-		let parent = void 0;
-		while(!(parent instanceof CustomElementDummy)) {
+		let parent = this.host || this.parentNode;
+		while (!("parentComponent" in parent)) {
 			parent = parent.host || parent.parentNode
 		}
 		

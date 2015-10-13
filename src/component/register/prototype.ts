@@ -6,6 +6,14 @@ import {bindDom} from "../../bind/bind"
 function createPrototype(target:any): any {
 	let proto = Object.create(HTMLElement.prototype);
 	
+	function g(p, k) {
+        	do {if(p.hasOwnProperty(k)) return p; else p = (p.prototype || p.__proto__)} while(true)
+        }
+	for(var key in target.prototype) {
+		Object.defineProperty(proto, key, Object.getOwnPropertyDescriptor(g(target.prototype, key), key));
+	}
+	
+	/*
 	let t = target;
 	do {
 		t = t.prototype || t.__proto__;
@@ -15,7 +23,6 @@ function createPrototype(target:any): any {
 		})
 	} while(!!(t.prototype || t.__proto__))
 	
-	/*
 	for(let key in target.prototype)
 		proto[key] = target.prototype[key];
 	*/
