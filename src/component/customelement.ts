@@ -12,6 +12,7 @@ class CustomElement extends HTMLElement {
 	onAttached: Array<(self:CustomElement)=>any>;
 	onDetached: Array<(self:CustomElement)=>any>;
 	beforeBinding: Array<Promise<any>>;
+	get parentComponent(): CustomElement {return void 0}
 }
 
 function CustomElementDummy() {
@@ -31,6 +32,17 @@ CustomElementDummy.prototype.canDeactivate = function() {
 CustomElementDummy.prototype.created = function() {}
 CustomElementDummy.prototype.attached = function() {}
 CustomElementDummy.prototype.detached = function() {}
+
+Object.defineProperty(CustomElement.prototype, "parentComponent", {
+	get: function () {
+		let parent = void 0;
+		while(!(parent instanceof CustomElementDummy)) {
+			parent = parent.host || parent.parentNode
+		}
+		
+		return parent;
+	}
+});
 
 
 export {CustomElement, CustomElementDummy}

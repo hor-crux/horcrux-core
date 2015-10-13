@@ -61,6 +61,7 @@ function bindNode(node: Node, model: Model): void;
     onAttached: Array<(self: CustomElement) => any>;
     onDetached: Array<(self: CustomElement) => any>;
     beforeBinding: Array<Promise<any>>;
+    parentComponent: CustomElement;
 }
  function CustomElementDummy(): void;
 /**
