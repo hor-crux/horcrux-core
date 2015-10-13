@@ -13,7 +13,11 @@ class CustomElement extends HTMLElement {
 	onDetached: Array<(self:CustomElement)=>any>;
 }
 
-function CustomElementDummy() {}
+function CustomElementDummy() {
+	this.onCreated = this.onCreated || [];
+	this.onAttached = this.onAttached || [];
+	this.onDetached = this.onDetached || [];
+}
 CustomElementDummy.prototype.canActivate = function() {
 	return Promise.resolve('');
 }
@@ -24,10 +28,6 @@ CustomElementDummy.prototype.canDeactivate = function() {
 CustomElementDummy.prototype.created = function() {}
 CustomElementDummy.prototype.attached = function() {}
 CustomElementDummy.prototype.detached = function() {}
-
-CustomElementDummy.prototype.onCreated = [];
-CustomElementDummy.prototype.onAttached = [];
-CustomElementDummy.prototype.onDetached = [];
 
 
 export {CustomElement, CustomElementDummy}
