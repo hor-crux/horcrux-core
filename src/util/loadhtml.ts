@@ -6,33 +6,9 @@ export default function loadHtml(id:string):Promise<any>  {
             
 		return new Promise(function(resolve, reject) {
 			
-			var selector = "link[rel='import']";
-			var links = document.querySelectorAll(selector);
 			var template = void 0;
 			
-			var promises = [].map.call(links, function(link) {
-				if(!!link.import) {
-					 return Promise.resolve(link);
-					 //return extractTemplate(link, id);
-				}
-				else {
-					return new Promise((resolve, reject) => {
-						let onload = link.onload.bind(link);
-						link.onload = () => {
-							onload();
-							resolve(link);
-							/*
-							extractTemplate(link, id)
-							.then(template => {
-								resolve(template);
-							})
-							*/
-						}
-					})
-				}
-			});
-			
-			Promise.all(promises)
+			getImports()
 			.then(links => {
 				return [].map.call(links, link => {
 					return extractTemplate(link, id);
@@ -51,6 +27,27 @@ export default function loadHtml(id:string):Promise<any>  {
 		})
 	})(id)
 	
+}
+
+function getImports(): Promise<HTMLLinkElement[]> {
+	var selector = "link[rel='import']";
+	var links = document.querySelectorAll(selector);
+	
+	return Promise.all([].map.call(links, function(link) {
+			if(!!link.import) {
+				return Promise.resolve(link);
+			}
+			else {
+				return new Promise((resolve, reject) => {
+					let onload = (link.onload || function(){}).bind(link);
+					link.onload = () => {
+						onload();
+						resolve(link);
+					}
+				})
+			}
+		})
+	);
 }
 
 function extractTemplate(link:any, id: string): Promise<any> {
