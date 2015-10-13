@@ -7,21 +7,24 @@ import bindNode from "./bindnode"
 let regex = /\{\{(.+)\}\}/gm;
 
 
-function bind(node:Node, model:Model): void {
+function bind(node:Node, model:Model): boolean {
 	if(node.attributes) {
 		Array.prototype.forEach.call(node.attributes, attr => {
 			bindAttribute(node, attr, model);
 		});
 	}
 	if(!!node.dontVisit)
-		return;
-	bindNode(node, model);
+		return false;
+	else {
+		bindNode(node, model);
+		return true;
+	}
 }
 
 function bindDom(dom:Dom, models:Array<any>): void {
 	let model = new Model(models);
 	visit(dom, node=>{
-		bind(node, model)
+		return bind(node, model)
 	});
 }
 

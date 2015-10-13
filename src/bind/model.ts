@@ -9,7 +9,7 @@ export default class Model {
 	}
 	
 	public get(path:string): ObjectAndValue {
-		let ret = void 0;
+		let ret: ObjectAndValue = {object: void 0, value: void 0};
 		
 		this.objects.forEach(obj => {
 			if(Model.has(obj, path))
@@ -40,7 +40,7 @@ export default class Model {
 		return ret;
 	}
 	
-	static has(object:any, path:string): any {
+	static has(object:any, path:string): boolean {
 		let ret = true;
 		
 		path.split('.')
@@ -58,7 +58,7 @@ export default class Model {
 	static get(object:any, path:string): any {
 		path.split('.')
 		.forEach(part => {
-			object = object[part]
+			object = object && object[part]
 		})
 		
 		return object;

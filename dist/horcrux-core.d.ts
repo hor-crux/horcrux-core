@@ -1,6 +1,6 @@
 declare module "horcrux-core" {
-export {	Attribute,	CustomAttribute,	CustomElement,	Component,	IComponentOptions,	ComponentOptions,	Binding, ModelBinding,	Property,	register,	bindDom,	Model,	Dom,	ObjectAndValue}
  class System {	static import(name:string): Promise<any>;}
+export {	Attribute,	CustomAttribute,	CustomElement,	Component,	IComponentOptions,	ComponentOptions,	Binding, ModelBinding,	Property,	register,	bindDom,	Model,	Dom,	ObjectAndValue}
  type Dom = Node | NodeList | Array<Node>;
  type ObjectAndValue = {
     object: any;
@@ -12,11 +12,11 @@ class Model {
     get(path: string): ObjectAndValue;
     set(path: string, value: any): void;
     findObject(path: string): any;
-    static has(object: any, path: string): any;
+    static has(object: any, path: string): boolean;
     static get(object: any, path: string): any;
     static set(object: any, path: string, value: any): void;
 }
- function visit(node: Dom, cb: (node: Node) => void): void;
+ function visit(node: Dom, cb: (node: Node) => boolean): void;
 function bindAttribute(node: Node, attr: Attr, model: Model): void;
 function bindNode(node: Node, model: Model): void;
  let regex: RegExp;

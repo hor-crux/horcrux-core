@@ -1,6 +1,6 @@
 import {Dom} from "./types"
 
-function visit(node:Dom, cb:(node:Node)=>void): void {
+function visit(node:Dom, cb:(node:Node)=>boolean): void {
 	
 	if(node instanceof NodeList) {
 		return Array.prototype.forEach.call(node, n => {
@@ -13,10 +13,10 @@ function visit(node:Dom, cb:(node:Node)=>void): void {
 		});
 	}
 	else if(node instanceof Node) {
-		if(node.dontVisit)
+			
+		if(!cb(<Node>node))
 			return;
 			
-		cb(<Node>node);
 		if((<Node>node).hasChildNodes()) {
 			Array.prototype.forEach.call((<Node>node).childNodes, n => {
 				visit(n, cb);
