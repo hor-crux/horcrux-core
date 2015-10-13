@@ -11,6 +11,7 @@ import {CustomElementDummy as CustomElement} from "./component/customelement"
 
 import Component from "./component/component"
 import {IComponentOptions, ComponentOptions} from "./component/options"
+import {ComponentRegistry} from "./component/componentregistry"
 
 import {Binding, ModelBinding} from "./bind/binding";
 
@@ -28,6 +29,7 @@ export {
 	Component,
 	IComponentOptions,
 	ComponentOptions,
+	ComponentRegistry,
 	Binding, ModelBinding,
 	Property,
 	register,

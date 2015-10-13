@@ -4,9 +4,9 @@ import { PathObserver } from 'observejs'
 
 class Binding {
 	
-	private other:Binding;
-	private changed:(value:any)=>any;
-	private value: any;
+	protected other:Binding;
+	protected changed:(value:any)=>any;
+	protected value: any;
 	
 	constructor(counterBinding?:Binding) {
 		if(counterBinding) {
@@ -34,7 +34,10 @@ class Binding {
 	}
 	
 	public getCounterBinding(): Binding {
-		return this.other || new Binding(this);
+		let counter = this.other || new Binding(this);
+		counter.value = this.value;
+		
+		return counter;
 	}
 }
 
@@ -51,6 +54,8 @@ class ModelBinding extends Binding {
 			let path = match[1];
 			let {object, value} = model.get(path);
 			let observer = new PathObserver(object, path);
+	
+			this.value = value;
 	
 			// update Counter-Binding on Model-Change
 			observer.open((newVal, oldVal) => {

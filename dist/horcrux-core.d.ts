@@ -1,6 +1,6 @@
 declare module "horcrux-core" {
-export {	Attribute,	CustomAttribute,	CustomElement,	Component,	IComponentOptions,	ComponentOptions,	Binding, ModelBinding,	Property,	register,	ElementRegistered,	bindDom,	Model,	Dom,	ObjectAndValue}
  class System {	static import(name:string): Promise<any>;}
+export {	Attribute,	CustomAttribute,	CustomElement,	Component,	IComponentOptions,	ComponentOptions,	ComponentRegistry,	Binding, ModelBinding,	Property,	register,	ElementRegistered,	bindDom,	Model,	Dom,	ObjectAndValue}
  type Dom = Node | NodeList | Array<Node>;
  type ObjectAndValue = {
     object: any;
@@ -22,9 +22,9 @@ function bindNode(node: Node, model: Model): void;
  let regex: RegExp;
  function bindDom(dom: Dom, models: Array<any>): void;
  class Binding {
-    private other;
-    private changed;
-    private value;
+    protected other: Binding;
+    protected changed: (value: any) => any;
+    protected value: any;
     constructor(counterBinding?: Binding);
     setNewValue(value: any): void;
     onNewValue(callback: (value: any) => any, callNow?: boolean): void;
@@ -67,6 +67,9 @@ function bindNode(node: Node, model: Model): void;
  * @returns Promise of template
  */
 function loadHtml(id: string): Promise<any>;
+ let ComponentRegistry: {
+    [selector: string]: any;
+};
 /**
  * Creates a new HTMLElement.prototype, assigns all properties of 'new target()' to it and returns it;
  */

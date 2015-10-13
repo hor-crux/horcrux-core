@@ -1,6 +1,7 @@
 import {EventBus, Event} from "horcrux-event";
 import {get} from "horcrux-di";
 
+import {ComponentRegistry} from "../componentregistry"
 import {createPrototype, assignCallback, createdCallback, attachedCallback, detachedCallback} from "./prototype"
 
 let eventBus = get(EventBus);
@@ -14,6 +15,7 @@ function register(name: string, target:any, template:any):void {
 	assignCallback(prototype, "detachedCallback", detachedCallback, []);
 	
 	(<any> document).registerElement(name, {prototype});
+	ComponentRegistry[name] = name;
 	eventBus.dispatch(new ElementRegistered(name));
 }
 
