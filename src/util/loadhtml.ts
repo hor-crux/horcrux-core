@@ -53,8 +53,12 @@ export default function loadHtml(id:string):Promise<any>  {
 
 function extractTemplate(link:any, id: string): Promise<any> {
 	var template = link.import.querySelector("template#" + id);
+	/*
 	if(!!template)
 		return Promise.resolve(template)
 	else
 		return Promise.resolve(void 0);
+	*/
+	
+	return !!template ? template : void 0;
 }
