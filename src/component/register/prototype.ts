@@ -1,6 +1,7 @@
 import {EventBus} from "horcrux-event"
 import {get} from "horcrux-di"
 
+import {ComponentRegistry} from "../componentregistry"
 import {ElementRegistered} from "./register"
 import {bindDom} from "../../bind/bind"
 
@@ -61,21 +62,21 @@ function createdCallback(template:any, target:any):void {
 		if(wc && wc.ShadowCSS)
 			wc.ShadowCSS.shimStyling(template.content, target.selector, "");
 		
-		if(template.hasAttribute("wait")) {
-			let unresolved = [].filter.call(shadow.querySelectorAll("*"), element => {
-				return element instanceof HTMLUnknownElement;
-			});
-			
+		let unresolved = [].filter.call(shadow.querySelectorAll("*[wait]"), element => {
+			return !(element.nodeName.toLowerCase() in ComponentRegistry);
+		});
+		
+		if(unresolved.length > 0) {
 			let eb = get(EventBus);
 			let id = eb.addEventListener(ElementRegistered, e => {
-				unresolved.splice(unresolved.indexOf(e.data), 1);
+				let index = unresolved.indexOf(e.data);
+				if(index === -1) return;
+				unresolved.splice(index, 1);
 				if(unresolved.length === 0) {
 					eb.removeEventListener(ElementRegistered, id);
 					bindDom(shadow, [this]);
 				}
 			});
-			
-			
 		} else {
 			bindDom(shadow, [this]);
 		}
