@@ -51,15 +51,24 @@ function createdCallback(template:any, target:any):void {
 		bindDom(shadow, [this]);
 	}
 	
-	this.created();
+	this.onCreated.forEach(method => {
+		method.call(this);
+	})
 	
+	this.created();
 }
 
 function attachedCallback(): void {
+	this.onAttached.forEach(method => {
+		method.call(this);
+	})
 	this.attached();
 }
 
 function detachedCallback(): void {
+	this.onDetached.forEach(method => {
+		method.call(this);
+	})
 	this.detached();
 }
 

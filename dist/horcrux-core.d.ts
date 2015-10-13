@@ -57,6 +57,9 @@ function bindNode(node: Node, model: Model): void;
     created(): void;
     attached(): void;
     detached(): void;
+    onCreated: Array<(self: CustomElement) => any>;
+    onAttached: Array<(self: CustomElement) => any>;
+    onDetached: Array<(self: CustomElement) => any>;
 }
  function CustomElementDummy(): void;
 /**

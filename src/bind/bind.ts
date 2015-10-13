@@ -14,7 +14,8 @@ function bind(node:Node, model:Model): void {
 		});
 	}
 	
-	bindNode(node, model);
+	if(!!node.parentNode)
+		bindNode(node, model);
 	
 }
 

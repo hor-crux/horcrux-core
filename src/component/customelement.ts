@@ -8,6 +8,9 @@ class CustomElement extends HTMLElement {
 	created(): void {}
 	attached(): void {}
 	detached(): void {}	
+	onCreated: Array<(self:CustomElement)=>any>;
+	onAttached: Array<(self:CustomElement)=>any>;
+	onDetached: Array<(self:CustomElement)=>any>;
 }
 
 function CustomElementDummy() {}
@@ -19,10 +22,12 @@ CustomElementDummy.prototype.canDeactivate = function() {
 }
 
 CustomElementDummy.prototype.created = function() {}
-
 CustomElementDummy.prototype.attached = function() {}
-
 CustomElementDummy.prototype.detached = function() {}
+
+CustomElementDummy.prototype.onCreated = [];
+CustomElementDummy.prototype.onAttached = [];
+CustomElementDummy.prototype.onDetached = [];
 
 
 export {CustomElement, CustomElementDummy}
