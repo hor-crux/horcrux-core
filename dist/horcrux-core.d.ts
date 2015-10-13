@@ -1,6 +1,6 @@
 declare module "horcrux-core" {
+export {	Attribute,	CustomAttribute,	CustomElement,	Component,	IComponentOptions,	ComponentOptions,	Binding, ModelBinding,	Property,	register,	ElementRegistered,	bindDom,	Model,	Dom,	ObjectAndValue}
  class System {	static import(name:string): Promise<any>;}
-export {	Attribute,	CustomAttribute,	CustomElement,	Component,	IComponentOptions,	ComponentOptions,	Binding, ModelBinding,	Property,	register,	bindDom,	Model,	Dom,	ObjectAndValue}
  type Dom = Node | NodeList | Array<Node>;
  type ObjectAndValue = {
     object: any;
@@ -60,7 +60,6 @@ function bindNode(node: Node, model: Model): void;
     onCreated: Array<(self: CustomElement) => any>;
     onAttached: Array<(self: CustomElement) => any>;
     onDetached: Array<(self: CustomElement) => any>;
-    beforeBinding: Array<Promise<any>>;
     parentComponent: CustomElement;
 }
  function CustomElementDummy(): void;
@@ -83,7 +82,9 @@ function loadHtml(id: string): Promise<any>;
  function createdCallback(template: any, target: any): void;
  function attachedCallback(): void;
  function detachedCallback(): void;
-function register(name: string, target: any, template: any): void;
+ function register(name: string, target: any, template: any): void;
+ class ElementRegistered extends Event<string> {
+}
 interface IComponentOptions {
     namespace?: string;
     template?: boolean;

@@ -1,6 +1,11 @@
+import {EventBus, Event} from "horcrux-event";
+import {get} from "horcrux-di";
+
 import {createPrototype, assignCallback, createdCallback, attachedCallback, detachedCallback} from "./prototype"
 
-export default function register(name: string, target:any, template:any):void {
+let eventBus = get(EventBus);
+
+function register(name: string, target:any, template:any):void {
 	
 	let prototype = createPrototype(target);
 	
@@ -9,4 +14,9 @@ export default function register(name: string, target:any, template:any):void {
 	assignCallback(prototype, "detachedCallback", detachedCallback, []);
 	
 	(<any> document).registerElement(name, {prototype});
+	eventBus.dispatch(new ElementRegistered(name));
 }
+
+class ElementRegistered extends Event<string> {}
+
+export {register, ElementRegistered}

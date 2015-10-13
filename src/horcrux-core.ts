@@ -16,7 +16,7 @@ import {Binding, ModelBinding} from "./bind/binding";
 
 import Property from "./component/property"
 
-import register from "./component/register/register"
+import {register, ElementRegistered} from "./component/register/register"
 import {bindDom} from "./bind/bind"
 import Model from "./bind/model"
 import {Dom, ObjectAndValue} from "./util/types"
@@ -31,6 +31,7 @@ export {
 	Binding, ModelBinding,
 	Property,
 	register,
+	ElementRegistered,
 	bindDom,
 	Model,
 	Dom,
