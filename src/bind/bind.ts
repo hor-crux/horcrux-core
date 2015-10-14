@@ -12,9 +12,11 @@ function bind(node:Node, model:Model): boolean {
 		return false;
 	
 	if(node.attributes) {
-		Array.prototype.forEach.call(node.attributes, attr => {
+		let names = [].map.call(node.attributes, function(a) {return a.name});
+		names.forEach(function(name) {
+			let attr = [].filter.call(node.attributes, function(a) {return a.name === name})[0];
 			bindAttribute(node, attr, model);
-		});
+		})
 	}
 	
 	if(!!(<any>node).dontVisit || (typeof node["hasAttribute"] === "function" && (<Element>node).hasAttribute("dontVisit")))
