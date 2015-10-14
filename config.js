@@ -13,6 +13,7 @@ System.config({
     "observejs": "github:polymer/observe-js@0.5.6",
     "webcomponents": "github:webcomponents/webcomponentsjs@0.7.14",
     "github:hor-crux/horcrux-core@master": {
+      "horcrux-event": "github:hor-crux/horcrux-event@master",
       "html": "github:hor-crux/html@master",
       "observejs": "github:polymer/observe-js@0.5.6",
       "webcomponents": "github:webcomponents/webcomponentsjs@0.7.14"

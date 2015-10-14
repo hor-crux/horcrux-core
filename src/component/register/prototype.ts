@@ -55,7 +55,7 @@ function createdCallback(template:any, target:any):void {
 	
 	target.call(this);
 	
-	templating: if(!!template) {
+	if(!!template) {
 		let shadow = this.createShadowRoot();
 		let clone = document.importNode(template.content, true);
 		shadow.appendChild(clone);
@@ -63,9 +63,7 @@ function createdCallback(template:any, target:any):void {
 		let wc = window["WebComponents"];
 		if(wc && wc.ShadowCSS)
 			wc.ShadowCSS.shimStyling(template.content, target.selector, "");
-			
-		if(!!this.dontVisit || this.hasAttribute("dontVisit"))
-			break templating;
+		
 			
 		if(template.hasAttribute("lazy"))
 			this.lazy = true;
@@ -79,7 +77,7 @@ function createdCallback(template:any, target:any):void {
 				if(index > -1) uncreated.splice(index, 1);
 				if(uncreated.length == 0) {
 					bindDom(shadow, [this].concat(this.ancestors));
-					this.eventBus.removeEventListener(ComponentCreatedEvent, id);
+					this.eventBus.removeEventListener(id);
 					this.eventBus.dispatch(new ComponentReadyEvent(this));
 				}
 			})
@@ -87,13 +85,13 @@ function createdCallback(template:any, target:any):void {
 		else if(this.parentComponent && this.parentComponent.lazy) {
 			let id = this.parentComponent.eventBus.addEventListener(ComponentReadyEvent, e => {
 				bindDom(shadow, [this].concat(this.ancestors));
-				this.parentComponent.eventBus.removeEventListener(ComponentReadyEvent, id);
+				this.parentComponent.eventBus.removeEventListener(id);
 			})
 		}
 		else if(!this.parentComponent && hasLazyParent(this)) {
 			let id = this.eventBus.addEventListener(ComponentCanBindEvent, e => {
 				bindDom(shadow, [this].concat(this.ancestors));
-				this.eventBus.removeEventListener(ComponentCanBindEvent, id);
+				this.eventBus.removeEventListener(id);
 			})
 		}
 		
