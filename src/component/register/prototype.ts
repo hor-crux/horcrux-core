@@ -70,7 +70,7 @@ function createdCallback(template:any, target:any):void {
 		if(template.hasAttribute("lazy"))
 			this.lazy = true;
 		
-		if(!this.lazy && !(this.parentComponent && this.parentComponent.lazy))
+		if(!this.lazy && !(this.parentComponent && this.parentComponent.lazy) && !hasLazyParent(this))
 			bindDom(shadow, [this].concat(this.ancestors));
 		else if(this.lazy){
 			let uncreated = [].filter.call(shadow.querySelectorAll("*"), element => {return element.nodeName.indexOf("-") > -1});
