@@ -11,12 +11,13 @@ export default class Model {
 	public get(path:string): ObjectAndValue {
 		let ret: ObjectAndValue = {object: void 0, value: void 0};
 		
-		this.objects.forEach(obj => {
+		this.objects.some(obj => {
 			if(Model.has(obj, path))
-				return ret = {
+				ret = {
 					object: obj,
 					value: Model.get(obj,path)
 				}
+				return true;
 		})
 		
 		return ret;
