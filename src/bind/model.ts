@@ -12,12 +12,13 @@ export default class Model {
 		let ret: ObjectAndValue = {object: void 0, value: void 0};
 		
 		this.objects.some(obj => {
-			if(Model.has(obj, path))
+			if(Model.has(obj, path)) {
 				ret = {
 					object: obj,
 					value: Model.get(obj,path)
 				}
 				return true;
+			}
 		})
 		
 		return ret;
