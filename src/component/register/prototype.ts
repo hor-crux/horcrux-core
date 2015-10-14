@@ -68,14 +68,14 @@ function createdCallback(template:any, target:any):void {
 			this.lazy = true;
 		
 		if(!this.lazy && !(this.parentComponent && this.parentComponent.lazy))
-			bindDom(shadow, [this]);
+			bindDom(shadow, [this].concat(this.ancestors));
 		else if(this.lazy){
 			let uncreated = [].filter.call(shadow.querySelectorAll("*"), element => {return element.nodeName.indexOf("-") > -1});
 			let id = this.eventBus.addEventListener(ComponentCreatedEvent, e => {
 				let index = uncreated.indexOf(e.data);
 				if(index > -1) uncreated.splice(index, 1);
 				if(uncreated.length == 0) {
-					bindDom(shadow, [this]);
+					bindDom(shadow, [this].concat(this.ancestors));
 					this.eventBus.removeEventListener(ComponentCreatedEvent, id);
 					this.eventBus.dispatch(new ComponentReadyEvent(this));
 				}
@@ -83,7 +83,7 @@ function createdCallback(template:any, target:any):void {
 		}
 		else if(this.parentComponent && this.parentComponent.lazy) {
 			let id = this.parentComponent.eventBus.addEventListener(ComponentReadyEvent, e => {
-				bindDom(shadow, [this]);
+				bindDom(shadow, [this].concat(this.ancestors));
 				this.parentComponent.eventBus.removeEventListener(ComponentReadyEvent, id);
 			})
 		}

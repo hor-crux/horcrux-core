@@ -6,6 +6,9 @@ class CustomElement extends HTMLElement {
 	properties: Array<string>;
 	lazy: boolean;
 	eventBus: EventBus;
+	parentComponent: CustomElement;
+	ancestors: Array<CustomElement>;
+	
 	createShadowRoot(): DocumentFragment {return void 0};
 	canActivate(): Promise<any> {return void 0};
 	canDeactivate(): Promise<any> {return void 0};
@@ -15,7 +18,6 @@ class CustomElement extends HTMLElement {
 	onCreated: Array<(self:CustomElement)=>any>;
 	onAttached: Array<(self:CustomElement)=>any>;
 	onDetached: Array<(self:CustomElement)=>any>;
-	get parentComponent(): CustomElement {return void 0}
 }
 
 function CustomElementDummy() {
@@ -44,6 +46,18 @@ Object.defineProperty(CustomElementDummy.prototype, "parentComponent", {
 		}
 		
 		return parent;
+	},
+	enumerable: true
+});
+
+Object.defineProperty(CustomElementDummy.prototype, "ancestors", {
+	get: function () {
+		let a = []
+		let p = this.parentComponent;
+		do {
+			a.push(p);
+		} while (p = p.parentComponent);
+		return a;
 	},
 	enumerable: true
 });

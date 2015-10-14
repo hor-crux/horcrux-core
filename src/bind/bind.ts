@@ -20,6 +20,9 @@ function bind(node:Node, model:Model): boolean {
 	if(!!(<any>node).dontVisit)
 		return false;
 		
+	if(node.nodeName.indexOf("-") > -1 && node.nodeName.indexOf("#") === -1)
+		return false;
+		
 	bindNode(node, model);
 	return true;
 }
