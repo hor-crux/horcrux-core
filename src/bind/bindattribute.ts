@@ -24,7 +24,7 @@ export default function bindAttribute(node:Node, attr:Attr, model:Model): void {
 			bindFunctionAttribute(node, attr, model, path);
 		}
 		
-		else if(!!(<any>attr.ownerElement).properties && (<any>attr.ownerElement).properties.indexOf(attr.name) > -1) {
+		else if(!!(<any>node).properties && (<any>node).properties.indexOf(attr.name) > -1) {
 			bindProperty(node, attr, model, path);
 		}
 		/*
@@ -63,7 +63,7 @@ function bindProperty(node:Node, attr:Attr, model:Model, path:string): void {
 		};
 		observer.open(cb);
 		cb(value, null);
-		attr.ownerElement.removeAttribute(attr.name);
+		node.removeAttribute(attr.name);
 	})(node, attr, model, path)
 	
 }
@@ -89,7 +89,7 @@ function bindFunctionWithParamAttribute(node:Node, attr:Attr, model:Model, path:
 	
 	let {object, value} = model.get(functionName);
 	
-	attr.ownerElement.removeAttribute(attr.name);
+	(<any>node).removeAttribute(attr.name);
 	node[attr.name.toLocaleLowerCase()] = event => {
 		value.apply(object, params);
 	}
@@ -98,7 +98,7 @@ function bindFunctionWithParamAttribute(node:Node, attr:Attr, model:Model, path:
 function bindFunctionAttribute(node:Node, attr:Attr, model:Model, path:string): void {
 	let {object, value} = model.get(path);
 	
-	attr.ownerElement.removeAttribute(attr.name);
+	(<any>node).removeAttribute(attr.name);
 	node[attr.name.toLocaleLowerCase()] = event => {
 		value.call(object, event);
 	}
