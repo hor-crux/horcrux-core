@@ -13,6 +13,8 @@ import Component from "./component/component"
 import {IComponentOptions, ComponentOptions} from "./component/options"
 import {ComponentRegistry} from "./component/componentregistry"
 
+import {ComponentCanBindEvent} from "./component/register/events"
+
 import {Binding, ModelBinding} from "./bind/binding";
 
 import Property from "./component/property"
@@ -30,6 +32,7 @@ export {
 	IComponentOptions,
 	ComponentOptions,
 	ComponentRegistry,
+	ComponentCanBindEvent,
 	Binding, ModelBinding,
 	Property,
 	register,

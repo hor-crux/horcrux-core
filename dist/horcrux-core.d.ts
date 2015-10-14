@@ -1,6 +1,6 @@
 declare module "horcrux-core" {
-export {	Attribute,	CustomAttribute,	CustomElement,	Component,	IComponentOptions,	ComponentOptions,	ComponentRegistry,	Binding, ModelBinding,	Property,	register,	ElementRegistered,	bindDom,	Model,	Dom,	ObjectAndValue}
  class System {	static import(name:string): Promise<any>;}
+export {	Attribute,	CustomAttribute,	CustomElement,	Component,	IComponentOptions,	ComponentOptions,	ComponentRegistry,	ComponentCanBindEvent,	Binding, ModelBinding,	Property,	register,	ElementRegistered,	bindDom,	Model,	Dom,	ObjectAndValue}
  type Dom = Node | NodeList | Array<Node>;
  type ObjectAndValue = {
     object: any;
@@ -77,6 +77,8 @@ function loadHtml(id: string): Promise<any>;
  class ComponentCreatedEvent extends Event<CustomElement> {
 }
  class ComponentReadyEvent extends Event<CustomElement> {
+}
+ class ComponentCanBindEvent extends Event<void> {
 }
 /**
  * Creates a new HTMLElement.prototype, assigns all properties of 'new target()' to it and returns it;

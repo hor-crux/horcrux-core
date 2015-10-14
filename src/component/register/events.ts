@@ -3,5 +3,6 @@ import {CustomElement} from "../customelement";
 
 class ComponentCreatedEvent extends Event<CustomElement> {}
 class ComponentReadyEvent extends Event<CustomElement> {}
+class ComponentCanBindEvent extends Event<void> {}
 
-export {ComponentCreatedEvent, ComponentReadyEvent}
+export {ComponentCreatedEvent, ComponentReadyEvent, ComponentCanBindEvent}

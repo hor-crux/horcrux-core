@@ -1,7 +1,7 @@
 import {EventBus} from "horcrux-event"
 import {get} from "horcrux-di"
 
-import {ComponentCreatedEvent, ComponentReadyEvent} from "./events"
+import {ComponentCreatedEvent, ComponentReadyEvent, ComponentCanBindEvent} from "./events"
 import {ComponentRegistry} from "../componentregistry"
 import {ElementRegistered} from "./register"
 import {bindDom} from "../../bind/bind"
@@ -64,7 +64,7 @@ function createdCallback(template:any, target:any):void {
 		if(wc && wc.ShadowCSS)
 			wc.ShadowCSS.shimStyling(template.content, target.selector, "");
 			
-		if(!!this.dontVisit || this.hasAttribute("dontVisit")))
+		if(!!this.dontVisit || this.hasAttribute("dontVisit"))
 			break templating;
 			
 		if(template.hasAttribute("lazy"))
@@ -88,6 +88,12 @@ function createdCallback(template:any, target:any):void {
 			let id = this.parentComponent.eventBus.addEventListener(ComponentReadyEvent, e => {
 				bindDom(shadow, [this].concat(this.ancestors));
 				this.parentComponent.eventBus.removeEventListener(ComponentReadyEvent, id);
+			})
+		}
+		else if(!this.parentComponent && hasLazyParent(this)) {
+			let id = this.eventBus.addEventListener(ComponentCanBindEvent, e => {
+				bindDom(shadow, [this].concat(this.ancestors));
+				this.eventBus.removeEventListener(ComponentReadyEvent, id);
 			})
 		}
 		
@@ -143,6 +149,14 @@ function detachedCallback(): void {
 		method.call(this, this);
 	})
 	this.detached();
+}
+
+function hasLazyParent(node:any): boolean {
+	while(node = node.parentNode) {
+		if(node.hasAttribute && node.hasAttribute("lazy"))
+			return true;
+	}
+	return false;
 }
 
 export {createPrototype, assignCallback, createdCallback, attachedCallback, detachedCallback}
