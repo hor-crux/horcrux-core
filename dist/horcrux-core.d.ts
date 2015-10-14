@@ -1,14 +1,15 @@
 declare module "horcrux-core" {
-export {	Attribute,	CustomAttribute,	CustomElement,	Component,	IComponentOptions,	ComponentOptions,	ComponentRegistry,	Binding, ModelBinding,	Property,	register,	ElementRegistered,	bindDom,	Model,	Dom,	ObjectAndValue}
  class System {	static import(name:string): Promise<any>;}
+export {	Attribute,	CustomAttribute,	CustomElement,	Component,	IComponentOptions,	ComponentOptions,	ComponentRegistry,	Binding, ModelBinding,	Property,	register,	ElementRegistered,	bindDom,	Model,	Dom,	ObjectAndValue}
  type Dom = Node | NodeList | Array<Node>;
  type ObjectAndValue = {
     object: any;
     value: any;
 };
 class Model {
-    protected objects: Array<any>;
+    protected _objects: Array<any>;
     constructor(objects: Array<any>);
+    objects: Array<any>;
     get(path: string): ObjectAndValue;
     set(path: string, value: any): void;
     findObject(path: string): any;

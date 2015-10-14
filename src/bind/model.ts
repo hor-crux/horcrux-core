@@ -2,10 +2,14 @@ import {ObjectAndValue} from "../util/types"
 
 export default class Model {
 	
-	protected objects:Array<any>;
+	protected _objects:Array<any>;
 	
 	constructor(objects:Array<any>) {
 		this.objects = objects;
+	}
+	
+	get objects(): Array<any> {
+		return this._objects;
 	}
 	
 	public get(path:string): ObjectAndValue {
