@@ -17,8 +17,8 @@ function bind(node:Node, model:Model): boolean {
 		let names = []
 			.map.call(node.attributes, function(a) {return a.name})
 			.sort((n1, n2) => {
-				n1 = Attributes[n1].precedence || 9;
-				n2 = Attributes[n2].precedence || 9;
+				n1 = (Attributes[n1] && Attributes[n1].precedence) || 9;
+				n2 = (Attributes[n2] && Attributes[n2].precedence) || 9;
 				return n1-n2;
 			});
 		names.forEach(function(name) {
