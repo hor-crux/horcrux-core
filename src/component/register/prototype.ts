@@ -121,11 +121,13 @@ function createdCallback(template:any, target:any):void {
 	
 	this.created();
 	
-	if(this.parentComponent && this.parentComponent.lazy)
-		this.parentComponent.eventBus.dispatch(new ComponentCreatedEvent(this));
+	
 }
 
 function attachedCallback(): void {
+	if(this.parentComponent && this.parentComponent.lazy)
+		this.parentComponent.eventBus.dispatch(new ComponentCreatedEvent(this));
+	
 	this.onAttached.forEach(method => {
 		method.call(this, this);
 	})

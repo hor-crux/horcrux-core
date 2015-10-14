@@ -39,7 +39,7 @@ CustomElementDummy.prototype.detached = function() {}
 Object.defineProperty(CustomElementDummy.prototype, "parentComponent", {
 	get: function () {
 		let parent = this.host || this.parentNode;
-		while (!("parentComponent" in parent)) {
+		while (!!parent && !("parentComponent" in parent)) {
 			parent = parent.host || parent.parentNode
 		}
 		
