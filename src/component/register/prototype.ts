@@ -90,7 +90,7 @@ function createdCallback(template:any, target:any):void {
 		}
 		else if(!this.parentComponent && hasLazyParent(this)) {
 			let id = this.eventBus.addEventListener(ComponentCanBindEvent, e => {
-				bindDom(shadow, [this].concat(this.ancestors));
+				bindDom(shadow, [this].concat(this.ancestors).concat(!!e.data ? e.data : []));
 				this.eventBus.removeEventListener(id);
 			})
 		}

@@ -78,7 +78,7 @@ function loadHtml(id: string): Promise<any>;
 }
  class ComponentReadyEvent extends Event<CustomElement> {
 }
- class ComponentCanBindEvent extends Event<void> {
+ class ComponentCanBindEvent extends Event<any[]> {
 }
 /**
  * Creates a new HTMLElement.prototype, assigns all properties of 'new target()' to it and returns it;
