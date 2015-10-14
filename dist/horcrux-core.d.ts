@@ -51,6 +51,8 @@ function bindNode(node: Node, model: Model): void;
     host: HTMLElement;
     shadowRoot: DocumentFragment;
     properties: Array<string>;
+    lazy: boolean;
+    eventBus: EventBus;
     createShadowRoot(): DocumentFragment;
     canActivate(): Promise<any>;
     canDeactivate(): Promise<any>;
@@ -70,6 +72,10 @@ function loadHtml(id: string): Promise<any>;
  let ComponentRegistry: {
     [selector: string]: any;
 };
+ class ComponentCreatedEvent extends Event<CustomElement> {
+}
+ class ComponentReadyEvent extends Event<CustomElement> {
+}
 /**
  * Creates a new HTMLElement.prototype, assigns all properties of 'new target()' to it and returns it;
  */

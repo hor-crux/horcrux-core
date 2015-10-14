@@ -1,7 +1,11 @@
+import { EventBus } from "horcrux-event";
+
 class CustomElement extends HTMLElement {
 	host: HTMLElement;
 	shadowRoot: DocumentFragment;
 	properties: Array<string>;
+	lazy: boolean;
+	eventBus: EventBus;
 	createShadowRoot(): DocumentFragment {return void 0};
 	canActivate(): Promise<any> {return void 0};
 	canDeactivate(): Promise<any> {return void 0};
@@ -15,6 +19,7 @@ class CustomElement extends HTMLElement {
 }
 
 function CustomElementDummy() {
+	this.lazy = false;
 	this.properties = this.properties || [];
 	this.onCreated = this.onCreated || [];
 	this.onAttached = this.onAttached || [];
@@ -39,6 +44,13 @@ Object.defineProperty(CustomElementDummy.prototype, "parentComponent", {
 		}
 		
 		return parent;
+	},
+	enumerable: true
+});
+
+Object.defineProperty(CustomElementDummy.prototype, "eventBus", {
+	get: function () {
+		return this._eventBus || (this._eventBus = new EventBus());
 	},
 	enumerable: true
 });

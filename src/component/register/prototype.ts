@@ -1,6 +1,7 @@
 import {EventBus} from "horcrux-event"
 import {get} from "horcrux-di"
 
+import {ComponentCreatedEvent, ComponentReadyEvent} from "./events"
 import {ComponentRegistry} from "../componentregistry"
 import {ElementRegistered} from "./register"
 import {bindDom} from "../../bind/bind"
@@ -46,6 +47,7 @@ function assignCallback(target:any, key:string, cb:Function, args=[]): void {
 	}
 }
 
+
 /**
  * Default 'createdCallback' for a Customelement. Appends the 'template' content to shadowroot, if !!template
  */
@@ -61,7 +63,32 @@ function createdCallback(template:any, target:any):void {
 		let wc = window["WebComponents"];
 		if(wc && wc.ShadowCSS)
 			wc.ShadowCSS.shimStyling(template.content, target.selector, "");
+			
+		if(template.hasAttribute("lazy"))
+			this.lazy = true;
 		
+		if(!this.lazy && !(this.parentComponent && this.parentComponent.lazy))
+			bindDom(shadow, [this]);
+		else if(this.lazy){
+			let uncreated = [].filter.call(shadow.querySelectorAll("*"), element => {return element.nodeName.indexOf("-") > -1});
+			let id = this.eventBus.addEventListener(ComponentCreatedEvent, e => {
+				let index = uncreated.indexOf(e.data);
+				if(index > -1) uncreated.splice(index, 1);
+				if(uncreated.length == 0) {
+					bindDom(shadow, [this]);
+					this.eventBus.removeEventListener(ComponentCreatedEvent, id);
+					this.eventBus.dispatch(new ComponentReadyEvent(this));
+				}
+			})
+		}
+		else if(this.parentComponent && this.parentComponent.lazy) {
+			let id = this.parentComponent.eventBus.addEventListener(ComponentReadyEvent, e => {
+				bindDom(shadow, [this]);
+				this.parentComponent.eventBus.removeEventListener(ComponentReadyEvent, id);
+			})
+		}
+		
+		/*
 		let unresolved = [].filter.call(shadow.querySelectorAll("*[wait]"), element => {
 			return !(element.nodeName.toLowerCase() in ComponentRegistry);
 		}).map(element => {
@@ -84,6 +111,7 @@ function createdCallback(template:any, target:any):void {
 		} else {
 			bindDom(shadow, [this]);
 		}
+		*/
 		
 	}
 	
@@ -92,12 +120,16 @@ function createdCallback(template:any, target:any):void {
 	})
 	
 	this.created();
+	
+	if(this.parentComponent && this.parentComponent.lazy)
+		this.parentComponent.eventBus.dispatch(new ComponentCreatedEvent(this));
 }
 
 function attachedCallback(): void {
 	this.onAttached.forEach(method => {
 		method.call(this, this);
 	})
+	
 	this.attached();
 }
 
