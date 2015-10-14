@@ -65,7 +65,7 @@ function createdCallback(template:any, target:any):void {
 			wc.ShadowCSS.shimStyling(template.content, target.selector, "");
 		
 			
-		if(template.hasAttribute("lazy"))
+		if(template.hasAttribute("lazy") || this.hasAttribute("lazy"))
 			this.lazy = true;
 		
 		if(!this.lazy && !(this.parentComponent && this.parentComponent.lazy) && !hasLazyParent(this))
