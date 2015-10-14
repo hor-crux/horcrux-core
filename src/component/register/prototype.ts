@@ -93,7 +93,7 @@ function createdCallback(template:any, target:any):void {
 		else if(!this.parentComponent && hasLazyParent(this)) {
 			let id = this.eventBus.addEventListener(ComponentCanBindEvent, e => {
 				bindDom(shadow, [this].concat(this.ancestors));
-				this.eventBus.removeEventListener(ComponentReadyEvent, id);
+				this.eventBus.removeEventListener(ComponentCanBindEvent, id);
 			})
 		}
 		
