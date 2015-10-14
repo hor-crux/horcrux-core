@@ -1,3 +1,5 @@
+import {Attributes} from "../attribute/attribute"
+
 import {Dom} from "../util/types"
 import Model from "./model"
 import visit from "../util/visit"
@@ -12,7 +14,13 @@ function bind(node:Node, model:Model): boolean {
 		return false;
 	
 	if(node.attributes) {
-		let names = [].map.call(node.attributes, function(a) {return a.name});
+		let names = []
+			.map.call(node.attributes, function(a) {return a.name})
+			.sort((n1, n2) => {
+				n1 = Attributes[n1].precedence || 9;
+				n2 = Attributes[n2].precedence || 9;
+				return n1-n2;
+			});
 		names.forEach(function(name) {
 			let attr = [].filter.call(node.attributes, function(a) {return a.name === name})[0];
 			bindAttribute(node, attr, model);

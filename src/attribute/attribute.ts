@@ -8,6 +8,9 @@ function Attribute(target:any):void {
 }
 
 class CustomAttribute {
+	
+	static precedence = 9;
+	
 	protected binding: Binding;
 	
 	constructor(protected node:Node, protected attr:Attr, protected model:Model) {

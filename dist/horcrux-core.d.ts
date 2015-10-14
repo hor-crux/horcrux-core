@@ -1,6 +1,6 @@
 declare module "horcrux-core" {
-export {	Attribute,	CustomAttribute,	CustomElement,	Component,	IComponentOptions,	ComponentOptions,	ComponentRegistry,	ComponentCanBindEvent,	Binding, ModelBinding,	Property,	register,	ElementRegistered,	bindDom,	Model,	Dom,	ObjectAndValue}
  class System {	static import(name:string): Promise<any>;}
+export {	Attribute,	CustomAttribute,	CustomElement,	Component,	IComponentOptions,	ComponentOptions,	ComponentRegistry,	ComponentCanBindEvent,	Binding, ModelBinding,	Property,	register,	ElementRegistered,	bindDom,	Model,	Dom,	ObjectAndValue}
  type Dom = Node | NodeList | Array<Node>;
  type ObjectAndValue = {
     object: any;
@@ -43,6 +43,7 @@ function bindNode(node: Node, model: Model): void;
     protected node: Node;
     protected attr: Attr;
     protected model: Model;
+    static precedence: number;
     protected binding: Binding;
     constructor(node: Node, attr: Attr, model: Model);
     protected createBinding(): void;
