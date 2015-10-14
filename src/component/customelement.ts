@@ -53,10 +53,10 @@ Object.defineProperty(CustomElementDummy.prototype, "parentComponent", {
 Object.defineProperty(CustomElementDummy.prototype, "ancestors", {
 	get: function () {
 		let a = []
-		let p = this.parentComponent;
-		do {
+		let p = this;
+		while (p = p.parentComponent) {
 			a.push(p);
-		} while (p = p.parentComponent);
+		}
 		return a;
 	},
 	enumerable: true
