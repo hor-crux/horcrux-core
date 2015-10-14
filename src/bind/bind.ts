@@ -8,7 +8,7 @@ let regex = /\{\{(.+)\}\}/gm;
 
 
 function bind(node:Node, model:Model): boolean {
-	if(!!(<any>node).dontVisit)
+	if(!!(<any>node).dontVisit || (typeof node["hasAttribute"] === "function" && (<Element>node).hasAttribute("dontVisit")))
 		return false;
 	
 	if(node.attributes) {
@@ -17,7 +17,7 @@ function bind(node:Node, model:Model): boolean {
 		});
 	}
 	
-	if(!!(<any>node).dontVisit)
+	if(!!(<any>node).dontVisit || (typeof node["hasAttribute"] === "function" && (<Element>node).hasAttribute("dontVisit")))
 		return false;
 		
 	if(node.nodeName.indexOf("-") > -1 && node.nodeName.indexOf("#") === -1)
