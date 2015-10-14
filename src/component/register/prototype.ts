@@ -55,7 +55,7 @@ function createdCallback(template:any, target:any):void {
 	
 	target.call(this);
 	
-	if(!!template) {
+	templating: if(!!template) {
 		let shadow = this.createShadowRoot();
 		let clone = document.importNode(template.content, true);
 		shadow.appendChild(clone);
@@ -63,6 +63,9 @@ function createdCallback(template:any, target:any):void {
 		let wc = window["WebComponents"];
 		if(wc && wc.ShadowCSS)
 			wc.ShadowCSS.shimStyling(template.content, target.selector, "");
+			
+		if(!!this.dontVisit || this.hasAttribute("dontVisit")))
+			break templating;
 			
 		if(template.hasAttribute("lazy"))
 			this.lazy = true;
