@@ -145,7 +145,7 @@ function createdCallback(template:any, target:any):void {
 
 function attachedCallback(): void {
 	if(!!this.lazy)
-		this.eventbus.dispatch(new ComponentCreatedEvent(this));
+		this.eventBus.dispatch(new ComponentCreatedEvent(this));
 	
 	if(this.parentComponent && this.parentComponent.lazy)
 		this.parentComponent.eventBus.dispatch(new ComponentCreatedEvent(this));
