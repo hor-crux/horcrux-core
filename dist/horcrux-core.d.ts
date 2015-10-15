@@ -1,5 +1,5 @@
 declare module "horcrux-core" {
-export {	Attribute,	CustomAttribute,	CustomElement,	Component,	IComponentOptions,	ComponentOptions,	ComponentRegistry,	ComponentCanBindEvent,	Binding, ModelBinding,	Property,	register,	ElementRegistered,	bindDom,	Model,	Dom,	ObjectAndValue}
+export {	Attribute,	CustomAttribute,	CustomElement,	Component,	IComponentOptions,	ComponentOptions,	ComponentRegistry,	ComponentCanBindEvent,	Binding, ModelBinding,	Property, IProperty,	register,	ElementRegistered,	bindDom,	Model,	Dom,	ObjectAndValue}
  class System {	static import(name:string): Promise<any>;}
  type Dom = Node | NodeList | Array<Node>;
  type ObjectAndValue = {
@@ -59,7 +59,7 @@ function bindNode(node: Node, model: Model): void;
     ancestors: Array<CustomElement>;
     createShadowRoot(): DocumentFragment;
     canActivate(): Promise<any>;
-    canDeactivate(): Promise<any>;
+    canDeactivate(newComponent: string, args: any): Promise<any>;
     created(): void;
     attached(): void;
     detached(): void;
@@ -109,5 +109,4 @@ interface IComponentOptions {
     private setValue(key, defaultValue);
 }
 function Component(target: any): void;
-function Property(target: any, key: string): void;
 }

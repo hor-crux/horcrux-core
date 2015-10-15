@@ -17,7 +17,7 @@ import {ComponentCanBindEvent} from "./component/register/events"
 
 import {Binding, ModelBinding} from "./bind/binding";
 
-import Property from "./component/property"
+import {Property, IProperty} from "./component/property"
 
 import {register, ElementRegistered} from "./component/register/register"
 import {bindDom} from "./bind/bind"
@@ -34,7 +34,7 @@ export {
 	ComponentRegistry,
 	ComponentCanBindEvent,
 	Binding, ModelBinding,
-	Property,
+	Property, IProperty,
 	register,
 	ElementRegistered,
 	bindDom,
