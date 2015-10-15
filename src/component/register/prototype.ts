@@ -71,21 +71,28 @@ function createdCallback(template:any, target:any):void {
 		if(!this.lazy && !(this.parentComponent && this.parentComponent.lazy) && !hasLazyParent(this))
 			bindDom(shadow, [this].concat(this.ancestors));
 		else if(this.lazy){
+			let id1, id2;
 			let uncreated = [].filter.call(shadow.querySelectorAll("*"), element => {return element.nodeName.indexOf("-") > -1});
-			let id1 = this.eventBus.addEventListener(ComponentCreatedEvent, e => {
+			id1 = this.eventBus.addEventListener(ComponentCreatedEvent, e => {
 				let index = uncreated.indexOf(e.data);
 				if(index > -1) uncreated.splice(index, 1);
 				if(uncreated.length == 0) {
+					try {
+						this.eventBus.removeEventListener(id1)
+						this.eventBus.removeEventListener(id2);
+					} catch(e) {}
 					bindDom(shadow, [this].concat(this.ancestors));
-					this.eventBus.removeEventListener(id1);
 					this.eventBus.dispatch(new ComponentReadyEvent(this));
 				}
 			})
-			let id2 = this.eventBus.addEventListener(ComponentCanBindEvent, e => {
+			id2 = this.eventBus.addEventListener(ComponentCanBindEvent, e => {
+				try {
+					this.eventBus.removeEventListener(id1)
+					this.eventBus.removeEventListener(id2);
+				} catch(e) {}
 				bindDom(shadow, [this].concat(this.ancestors).concat(!!e.data ? e.data : []));
-				this.eventBus.removeEventListener(id1)
-				this.eventBus.removeEventListener(id2);
 			})
+			
 		}
 		else if(this.parentComponent && this.parentComponent.lazy) {
 			let id = this.parentComponent.eventBus.addEventListener(ComponentReadyEvent, e => {
@@ -137,6 +144,9 @@ function createdCallback(template:any, target:any):void {
 }
 
 function attachedCallback(): void {
+	if(!!this.lazy)
+		this.eventbus.dispatch(new ComponentCreatedEvent(this));
+	
 	if(this.parentComponent && this.parentComponent.lazy)
 		this.parentComponent.eventBus.dispatch(new ComponentCreatedEvent(this));
 	
