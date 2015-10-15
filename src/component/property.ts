@@ -15,8 +15,9 @@ let Property: IProperty = (target:any, key:string) => {
 	else {
 		let type = target;		
 		return (target:any, key:string) => {
-			Property.types[target.selector] = Property.types[target.selector] || {};
-			Property.types[target.selector][key] = type;
+			let selector = target.constructor.selector;
+			Property.types[selector] = Property.types[selector] || {};
+			Property.types[selector][key] = type;
 			decorator(target, key);
 		};
 	}
@@ -25,7 +26,8 @@ let Property: IProperty = (target:any, key:string) => {
 Property.types = {};
 
 Property.setProperty = (object:any, key:string, value:any) => {
-	let type = Property.types[object.selector] && Property.types[object.selector][key];
+	let selector = object.constructor.selector;
+	let type = Property.types[selector] && Property.types[selector][key];
 	if(type === Number)
 		object[key] = Number.parseFloat(value);
 	else if(type === Boolean)
