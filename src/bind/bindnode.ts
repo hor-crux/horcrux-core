@@ -16,7 +16,8 @@ function bindTextNode(node:Node, model:Model): void {
 	let match = regex.exec(node.textContent);
 	if(match) {
 		let path = match[1];
-		let r = new RegExp("\{\{" + path + "\}\}", "g")
+		let escapedPath =  path.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, "\\$&");
+		let r = new RegExp("\{\{" + escapedPath + "\}\}", "g")
 		
 		
 		let originalText = node.textContent;
