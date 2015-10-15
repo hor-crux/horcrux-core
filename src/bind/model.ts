@@ -12,7 +12,7 @@ export default class Model {
 		return this._objects;
 	}
 	
-	public get(path:string): ObjectAndValue {
+	public get(path:string, strict=false): ObjectAndValue {
 		let ret: ObjectAndValue = {object: void 0, value: void 0};
 		
 		this.objects.some(obj => {
@@ -25,7 +25,7 @@ export default class Model {
 			}
 		})
 		
-		return ret;
+		return !!ret.object ? ret : (!!strict ? ret : this.objects[0]);
 	}
 	
 	public set(path:string, value:any): void {

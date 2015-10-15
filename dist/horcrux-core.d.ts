@@ -10,7 +10,7 @@ class Model {
     protected _objects: Array<any>;
     constructor(objects: Array<any>);
     objects: Array<any>;
-    get(path: string): ObjectAndValue;
+    get(path: string, strict?: boolean): ObjectAndValue;
     set(path: string, value: any): void;
     findObject(path: string): any;
     static has(object: any, path: string): boolean;
