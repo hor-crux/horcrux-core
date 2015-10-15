@@ -25,7 +25,7 @@ export default class Model {
 			}
 		})
 		*/
-		let obj = this.objects
+		let object = this.objects
 		.map(obj => {
 			return {order: Model.order(obj, path), object: obj};
 		})
@@ -33,9 +33,10 @@ export default class Model {
 			return curr.order > prev.order ? curr : prev;
 		}).object;
 		
-		let ret = Model.get(obj, path);
+		let value = Model.get(object, path);
+		let ov = {object, value}
 		
-		return typeof ret.value === "undefined" ? ret : (!!strict ? {object: void 0, value: void 0} : ret );
+		return typeof value !== "undefined" ? ov : (!!strict ? {object: void 0, value: value} : ov );
 	}
 	
 	public set(path:string, value:any): void {
