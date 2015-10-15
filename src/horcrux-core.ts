@@ -13,6 +13,8 @@ import Component from "./component/component"
 import {IComponentOptions, ComponentOptions} from "./component/options"
 import {ComponentRegistry} from "./component/componentregistry"
 
+import {watch} from "./component/watch" 
+
 import {ComponentCanBindEvent} from "./component/register/events"
 
 import {Binding, ModelBinding} from "./bind/binding";
@@ -24,6 +26,7 @@ import {bindDom} from "./bind/bind"
 import Model from "./bind/model"
 import {Dom, ObjectAndValue} from "./util/types"
 
+
 export {
 	Attribute,
 	CustomAttribute,
@@ -32,6 +35,7 @@ export {
 	IComponentOptions,
 	ComponentOptions,
 	ComponentRegistry,
+	watch,
 	ComponentCanBindEvent,
 	Binding, ModelBinding,
 	Property, IProperty,
