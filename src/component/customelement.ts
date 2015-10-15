@@ -11,7 +11,7 @@ class CustomElement extends HTMLElement {
 	
 	createShadowRoot(): DocumentFragment {return void 0};
 	canActivate(): Promise<any> {return void 0};
-	canDeactivate(): Promise<any> {return void 0};
+	canDeactivate(newComponent: string, args:any): Promise<any> {return void 0};
 	created(): void {}
 	attached(): void {}
 	detached(): void {}	
