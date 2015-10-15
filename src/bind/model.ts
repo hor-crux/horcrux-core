@@ -25,7 +25,7 @@ export default class Model {
 			}
 		})
 		
-		return !!ret.object ? ret : (!!strict ? ret : this.objects[0]);
+		return !!ret.object ? ret : (!!strict ? ret : {object:this.objects[0], value:ret.value});
 	}
 	
 	public set(path:string, value:any): void {
