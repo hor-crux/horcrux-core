@@ -51,7 +51,7 @@ export default class Model {
 		
 		path.split('.')
 		.forEach((part, index, parts) => {
-			if(typeof object[part] === 'undefined' && index+1 < parts.length)
+			if(typeof object[part] === 'undefined')
 				return ret = false;
 			else {
 				object = object[part]
