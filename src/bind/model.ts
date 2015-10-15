@@ -3,6 +3,7 @@ import {ObjectAndValue} from "../util/types"
 export default class Model {
 	
 	protected _objects:Array<any>;
+	protected pathCache: {[path:string]:any} = {};
 	
 	constructor(objects:Array<any>) {
 		this._objects = objects;
@@ -25,26 +26,30 @@ export default class Model {
 			}
 		})
 		*/
-		let object = this.objects
-		.map(obj => {
-			return {order: Model.order(obj, path), object: obj};
-		})
-		.reduce((prev, curr) => {
-			return curr.order > prev.order ? curr : prev;
-		}).object;
-		
+		let object = Model.highestOrder(this.objects, path);
 		let value = Model.get(object, path);
-		let ov = {object, value}
+		let ov = {object, value};
 		
-		return typeof value !== "undefined" ? ov : (!!strict ? {object: void 0, value: value} : ov );
+		//no value found - strict mode
+		if(typeof value === "undefined" && !!strict) {
+			return {object: void 0, value: value};
+		}
+		//value found || no value found && !strict mode
+		else {
+			this.pathCache[path] = object;
+			return ov;
+		}
 	}
 	
 	public set(path:string, value:any): void {
-		this.objects.forEach(obj => {
-			if(Model.has(obj, path)) {
-				return Model.set(obj, path, value);
-			}
-		})
+		if(typeof this.pathCache[path] !== "undefined") {
+			Model.set(this.pathCache[path], path, value);
+		}
+		else {
+			let object = Model.highestOrder(this.objects, path);
+			Model.set(object, path, value);
+		}
+		
 	}
 	
 	public findObject(path:string): any {
@@ -85,10 +90,21 @@ export default class Model {
 			else {
 				object = object[part]
 				order++;
+				return true;
 			}
 		})
 		
 		return order;
+	}
+	
+	static highestOrder(objects:any[], path:string): any {
+		return objects
+		.map(obj => {
+			return {order: Model.order(obj, path), object: obj};
+		})
+		.reduce((prev, curr) => {
+			return curr.order > prev.order ? curr : prev;
+		}).object;
 	}
 	
 	static get(object:any, path:string): any {

@@ -8,6 +8,9 @@ declare module "horcrux-core" {
 };
 class Model {
     protected _objects: Array<any>;
+    protected pathCache: {
+        [path: string]: any;
+    };
     constructor(objects: Array<any>);
     objects: Array<any>;
     get(path: string, strict?: boolean): ObjectAndValue;
@@ -15,6 +18,7 @@ class Model {
     findObject(path: string): any;
     static has(object: any, path: string): boolean;
     static order(object: any, path: string): number;
+    static highestOrder(objects: any[], path: string): any;
     static get(object: any, path: string): any;
     static set(object: any, path: string, value: any): void;
 }
