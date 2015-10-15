@@ -13,8 +13,8 @@ export default class Model {
 	}
 	
 	public get(path:string, strict=false): ObjectAndValue {
+		/*
 		let ret: ObjectAndValue = {object: void 0, value: void 0};
-		
 		this.objects.some(obj => {
 			if(Model.has(obj, path)) {
 				ret = {
@@ -24,8 +24,18 @@ export default class Model {
 				return true;
 			}
 		})
+		*/
+		let obj = this.objects
+		.map(obj => {
+			return {order: Model.order(obj, path), object: obj};
+		})
+		.reduce((prev, curr) => {
+			return curr.order > prev.order ? curr : prev;
+		}).object;
 		
-		return !!ret.object ? ret : (!!strict ? ret : {object:this.objects[0], value:ret.value});
+		let ret = Model.get(obj, path);
+		
+		return typeof ret.value === "undefined" ? ret : (!!strict ? {object: void 0, value: void 0} : ret );
 	}
 	
 	public set(path:string, value:any): void {
@@ -47,6 +57,8 @@ export default class Model {
 	}
 	
 	static has(object:any, path:string): boolean {
+		return Model.order(object, path) === path.split('.').length;
+		/*
 		let ret = true;
 		
 		path.split('.')
@@ -59,6 +71,23 @@ export default class Model {
 		})
 		
 		return ret;
+		*/
+	}
+	
+	static order(object:any, path:string): number {
+		let order = 0;
+		
+		path.split('.')
+		.every((part, index, parts) => {
+			if(typeof object[part] === 'undefined')
+				return false;
+			else {
+				object = object[part]
+				order++;
+			}
+		})
+		
+		return order;
 	}
 	
 	static get(object:any, path:string): any {
